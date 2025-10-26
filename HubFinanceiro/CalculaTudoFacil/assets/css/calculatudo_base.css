@@ -1,0 +1,54 @@
+/* Arquivo de estilo para css */
+/* calculatudo_base.css */
+
+:root {
+    --fundo-clean: #FFFFFF;
+    --cor-principal-clean: #0047AB; /* Azul Royal */
+    --texto-escuro: #333333;
+    --borda-clara: #EEEEEE;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--fundo-clean);
+    color: var(--texto-escuro);
+    padding: 20px;
+}
+
+.logo-calculatudo {
+    font-size: 1.5em;
+    color: var(--cor-principal-clean);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.logo-calculatudo i {
+    margin-right: 10px;
+    font-size: 1.8em;
+}
+
+.calculadora-clean input, .calculadora-clean select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--borda-clara);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.btn-clean-acao {
+    background-color: var(--cor-principal-clean);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.resultado-clean {
+    margin-top: 30px;
+    border: 1px solid var(--cor-principal-clean);
+    padding: 20px;
+    border-radius: 5px;
+}

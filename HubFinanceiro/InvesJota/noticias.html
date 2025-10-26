@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias Dinâmicas | InvesJota</title>
+    <link rel="stylesheet" href="assets/css/invesjota_base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos do Feed Dinâmico */
+        .feed-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .noticia-card {
+            background-color: var(--cor-secundaria);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 250px;
+        }
+        .noticia-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .noticia-card h3 {
+            font-size: 1.2em;
+            color: var(--cor-primaria);
+            margin-top: 0;
+            border-bottom: 1px solid var(--cor-primaria);
+            padding-bottom: 5px;
+        }
+        .noticia-card a {
+            align-self: flex-start;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-fixo">
+        <span class="logo-invesjota">InvesJota</span>
+        <nav class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="noticias.html">Notícias</a>
+            <a href="catalogo_calculadoras.html">Calculadoras</a>
+            <a href="juros_simples.html">Juros Simples</a>
+        </nav>
+    </div>
+
+    <div class="bloco-ads" style="margin-top: 60px;">[Bloco AdSense Topo/Banner - 728x90]</div>
+
+    <main style="padding: 20px; max-width: 1200px; margin: 0 auto;">
+        <h1>Feed Dinâmico de Notícias Financeiras</h1>
+        <p>Análise de mercado atualizada, gerada a partir de dados de fontes confiáveis.</p>
+        
+        <div class="bloco-ads">[Bloco AdSense In-Content - Abaixo do Título]</div>
+
+        <section id="feed-noticias" class="feed-grid">
+            <p>Carregando notícias...</p>
+        </section>
+
+        <section style="text-align: center; margin-top: 40px;">
+            <button class="btn-acao" onclick="renderizarFeed(true)">
+                <i class="fas fa-sync-alt"></i> Atualizar Agora
+            </button>
+        </section>
+    </main>
+
+    <div class="bloco-ads">[Bloco AdSense Rodapé - 300x250/Bloco Responsivo]</div>
+
+    <script>
+        // SIMULAÇÃO DA CHAMADA DE API E GERAÇÃO DE CONTEÚDO
+        // A chave 'resumo' simula o conteúdo reescrito/filtrado pela IA.
+        const noticiasSimuladas = [
+            { 
+                titulo: "A Taxa Selic e o Novo Ciclo de Quedas: Impacto na Renda Fixa", 
+                resumo: "Ajustes recentes na política monetária indicam uma transição no cenário de investimentos. A renda fixa perde rentabilidade nominal, exigindo que o investidor clássico busque títulos prefixados ou IPCA+ para proteger o capital.", 
+                link: "#" 
+            },
+            { 
+                titulo: "Fundo Imobiliário em Destaque: O Setor Logístico e a E-Commerce", 
+                resumo: "O boom do comércio eletrônico continua impulsionando os galpões logísticos. Analisamos os FIIs que apresentaram o maior 'dividend yield' nos últimos 60 dias, um sinal de solidez para o seu portfólio.", 
+                link: "#" 
+            },
+            { 
+                titulo: "Petróleo e Geopolítica: A Volatilidade que Tira o Sono do Trader", 
+                resumo: "Conflitos internacionais e a política de produção da OPEP definem a oscilação do barril. Entenda como essa instabilidade pode ser usada a seu favor, focando em commodities e diversificação cambial.", 
+                link: "#" 
+            },
+            { 
+                titulo: "Tecnologia Disruptiva: O Futuro do Pagamento Digital no Mercado Global", 
+                resumo: "Grandes empresas de tecnologia continuam a transformar o setor financeiro. O crescimento de *fintechs* que facilitam microtransações aponta para uma revolução no crédito e na gestão de ativos digitais.", 
+                link: "#" 
+            },
+        ];
+
+        function renderizarFeed(isUpdate = false) {
+            const feedContainer = document.getElementById('feed-noticias');
+            feedContainer.innerHTML = '';
+            
+            if (isUpdate) {
+                // Simulação de carregamento da API
+                feedContainer.innerHTML = '<p style="text-align: center; color: var(--cor-primaria);">Buscando novas análises (Simulação)...</p>';
+                setTimeout(() => {
+                    // Adiciona uma notícia nova (simulada) no topo em caso de atualização
+                    const novaNoticia = {
+                        titulo: "Análise Exclusiva: As 3 Ações Mais Sólidas para o Próximo Trimestre",
+                        resumo: "Nossa IA analisou os balanços e fluxos de caixa e identificou oportunidades de investimento de longo prazo, com foco em valor intrínseco e governança.",
+                        link: "#"
+                    };
+                    const feedAtualizado = [novaNoticia, ...noticiasSimuladas];
+                    exibirCards(feedAtualizado);
+                }, 1000);
+            } else {
+                exibirCards(noticiasSimuladas);
+            }
+        }
+
+        function exibirCards(noticiasArray) {
+             const feedContainer = document.getElementById('feed-noticias');
+             feedContainer.innerHTML = ''; // Limpa antes de exibir
+
+             noticiasArray.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'noticia-card';
+                card.innerHTML = `
+                    <div style="flex-grow: 1;">
+                        <h3>${item.titulo}</h3>
+                        <p>${item.resumo}</p>
+                    </div>
+                    <a href="${item.link}" class="btn-acao" style="display: inline-block; align-self: flex-end;">Detalhes</a>
+                `;
+                feedContainer.appendChild(card);
+            });
+        }
+
+        // Carrega o feed inicial ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            renderizarFeed();
+        });
+
+        // EXEMPLO DE INTEGRAÇÃO REAL (Se tivéssemos um backend/proxy e uma chave de API)
+        /*
+        async function buscarNoticiasReais() {
+            const API_KEY = 'SUA_CHAVE_AQUI'; // Chave da NewsAPI ou MarketStack
+            const URL = `https://api.example.com/v2/top-headlines?q=investimentos&apiKey=${API_KEY}`;
+            
+            try {
+                const response = await fetch(URL);
+                const data = await response.json();
+                
+                // Aqui entraria a LÓGICA DA IA para reescrever/filtrar
+                const noticiasFiltradas = data.articles.map(article => ({
+                    titulo: article.title,
+                    resumo: 'Análise da IA: ' + article.description.substring(0, 100) + '...', // Simulação de resumo da IA
+                    link: article.url
+                }));
+                
+                exibirCards(noticiasFiltradas);
+
+            } catch (error) {
+                console.error("Erro ao buscar notícias da API:", error);
+                exibirCards([{ titulo: "Erro de Conexão", resumo: "Não foi possível carregar as notícias dinâmicas.", link: "#" }]);
+            }
+        }
+        // document.addEventListener('DOMContentLoaded', buscarNoticiasReais);
+        */
+    </script>
+</body>
+</html>

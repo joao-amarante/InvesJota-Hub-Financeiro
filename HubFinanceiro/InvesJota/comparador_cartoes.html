@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparador de Cartões | InvesJota</title>
+    <link rel="stylesheet" href="assets/css/invesjota_base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .comparador-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .cartao-form {
+            background-color: var(--cor-secundaria);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .cartao-form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid var(--cor-primaria);
+            border-radius: 4px;
+        }
+        .tabela-comparativa {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        .tabela-comparativa th, .tabela-comparativa td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        .tabela-comparativa th {
+            background-color: var(--cor-primaria);
+            color: white;
+        }
+        .grafico-area {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #E6EAE4;
+            border-radius: 8px;
+        }
+        /* Estilo para a Seção Educacional */
+        .conteudo-educativo {
+            margin-top: 50px;
+            padding: 25px;
+            border: 1px solid var(--cor-primaria);
+            border-radius: 6px;
+            background-color: var(--fundo-principal);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: left;
+        }
+        .conteudo-educativo h3 {
+            color: var(--cor-acao);
+            border-bottom: 2px solid var(--cor-primaria);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        .conteudo-educativo p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (max-width: 768px) {
+            .comparador-grid {
+                grid-template-columns: 1fr; /* Stack em mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-fixo">
+        <span class="logo-invesjota">InvesJota</span>
+        <nav class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="noticias.html">Notícias</a>
+            <a href="catalogo_calculadoras.html">Calculadoras</a>
+            <a href="juros_simples.html">Juros Simples</a>
+        </nav>
+    </div>
+
+    <div class="bloco-ads" style="margin-top: 60px;">[Bloco AdSense Topo/Banner - 728x90]</div>
+
+    <main style="padding: 20px; max-width: 1200px; margin: 0 auto;">
+        <h1 style="text-align: center;">Comparador de Cartões de Crédito</h1>
+        <p style="text-align: center;">Insira os dados de dois cartões para analisar qual oferece o melhor custo-benefício estimado em termos de anuidade, risco de juros e recompensas.</p>
+
+        <div class="bloco-ads">[Bloco AdSense In-Content]</div>
+
+        <section class="comparador-grid fade-in">
+            <div class="cartao-form">
+                <h3 style="color: var(--cor-acao);">Cartão 1</h3>
+                <label>Nome:</label><input type="text" id="nome1" value="Cartão A">
+                <label>Anuidade (R$):</label><input type="number" id="anuidade1" value="120">
+                <label>Taxa Rotativo Anual (%):</label><input type="number" id="juros1" value="100">
+                <label>Benefício (Milhas/Cashback - % da fatura):</label><input type="number" id="beneficio1" value="1.5">
+            </div>
+
+            <div class="cartao-form">
+                <h3 style="color: var(--cor-acao);">Cartão 2</h3>
+                <label>Nome:</label><input type="text" id="nome2" value="Cartão B">
+                <label>Anuidade (R$):</label><input type="number" id="anuidade2" value="480">
+                <label>Taxa Rotativo Anual (%):</label><input type="number" id="juros2" value="70">
+                <label>Benefício (Milhas/Cashback - % da fatura):</label><input type="number" id="beneficio2" value="3.0">
+            </div>
+        </section>
+
+        <button class="btn-acao fade-in" onclick="compararCartoes()" style="width: 100%; margin-top: 20px;">
+            Comparar Cartões
+        </button>
+
+        <div id="resultado-comparacao" class="resultado-container" style="display:none;">
+            <h2>Resultado da Análise de Custo-Benefício</h2>
+            
+            <div class="grafico-area">
+                <canvas id="graficoComparacao" height="150"></canvas>
+            </div>
+
+            <table class="tabela-comparativa" id="tabela-cartoes">
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th id="header-nome1">Cartão 1</th>
+                        <th id="header-nome2">Cartão 2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Anuidade (R$)</td><td id="anuidade-res1"></td><td id="anuidade-res2"></td></tr>
+                    <tr><td>Juros Rotativo Anual (%)</td><td id="juros-res1"></td><td id="juros-res2"></td></tr>
+                    <tr><td>Benefício Estimado (%)</td><td id="beneficio-res1"></td><td id="beneficio-res2"></td></tr>
+                    <tr style="font-weight: bold; background-color: #f0f0f0;">
+                        <td>Custo/Benefício (Rank)</td>
+                        <td id="rank-res1"></td>
+                        <td id="rank-res2"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <section class="conteudo-educativo fade-in">
+            <h2>A Arte de Escolher um Cartão: O Custo Oculto vs. Recompensa</h2>
+            
+            <h3>Como a Calculadora Ranqueia os Cartões</h3>
+            <p>A calculadora InvesJota utiliza uma métrica de custo-benefício simplificada, mas poderosa, para ranquear as opções. A fórmula balanceia o custo fixo (anuidade) e o risco de custo (juros do rotativo) contra a recompensa que você obtém (cashback/milhas). A lógica é: **Quanto menor a relação Custo/Benefício, melhor o cartão.**</p>
+            <p><strong>Cálculo Interno:</strong> O custo total considera a Anuidade mais uma penalidade pelos Juros Rotativos, pois a alta taxa de juros representa um risco significativo ao seu planejamento financeiro caso você precise usar o crédito rotativo. A fórmula é: $(Anuidade + (Juros\ Rotativo\ Anual \times Ponderação\ de\ Risco)) / Benefício\ (\%)$.</p>
+            <p>O gráfico de barras visualiza essa dualidade: você pode ter um cartão com alta anuidade, mas se o benefício for exponencialmente maior, o custo/benefício geral será favorável. Por outro lado, um cartão sem anuidade, mas com juros rotativos estratosféricos, é um risco que anula rapidamente qualquer pequeno cashback que ele ofereça. Lembre-se, a taxa rotativa é a taxa de juros mais cara do mercado, e o risco dela deve ser alto na sua avaliação.</p>
+            
+            <h3>Onde os Bancos Escondem o Custo (Taxa Rotativa e Anuidade)</h3>
+            <p>A maior armadilha financeira em cartões não é a anuidade, mas sim a **Taxa de Juros Rotativo Anual**. Esta taxa é aplicada quando você não paga o valor total da fatura e é frequentemente superior a 300% ao ano, esmagando qualquer benefício que o cartão possa oferecer. O investidor elegante não se endivida, mas reconhece o risco: um cartão com juros baixos no rotativo é um 'seguro' melhor do que um cartão com juros altíssimos, mesmo que você nunca planeje usá-lo. Portanto, a taxa de juros é ponderada para refletir esse risco no nosso ranqueamento.</p>
+            <p>Muitas vezes, cartões 'Black' ou 'Infinite' têm anuidades altas (o custo fixo), mas o benefício em *milhas* ou *cashback* (a recompensa) supera esse custo, especialmente para quem tem um alto volume de gastos mensais. Para um usuário que gasta R$ 10.000/mês, 3% de cashback (R$ 300) rapidamente compensa uma anuidade de R$ 500,00.</p>
+            
+            <h3>A Avaliação da Recompensa (Milhas vs. Cashback)</h3>
+            <p>A seção de Benefício deve ser inserida como uma porcentagem da fatura mensal. Esta é a métrica mais justa para comparar milhas e cashback. O cashback é simples e direto: 1% de cashback significa 1% de volta em dinheiro. Milhas, por outro lado, precisam ser convertidas em um valor monetário (ex: "Quantos reais valem 1000 milhas no meu uso habitual?"). Para simplificar, o benefício de milhas deve ser estimado na calculadora com base no valor real que você consegue obter por elas.</p>
+            <p>**Exemplo de uso:** Se o Cartão A oferece R$ 120 de anuidade e 1% de cashback, e o Cartão B oferece R$ 480 de anuidade e 3% de cashback, o Cartão B é muito mais vantajoso se seus gastos forem altos, pois o retorno de 3% compensará o custo maior da anuidade rapidamente. Nossa ferramenta ajuda a quantificar essa intuição.</p>
+            
+            <h3>Como Usar a Calculadora para Decisões</h3>
+            <p>Para obter o melhor resultado da ferramenta:</p>
+            <ol>
+                <li><strong>Seja Honesto com o Juro:</strong> Use a taxa de juros rotativo real do seu contrato.</li>
+                <li><strong>Estime o Benefício:</strong> Se for milhagem, descubra qual é o valor percentual real que você recupera. Não use o valor nominal.</li>
+                <li><strong>Foque no Rank:</strong> O Rank (1º ou 2º) deve guiar sua decisão. O cartão que oferece o Rank "Melhor" é aquele que, segundo nossa ponderação, oferece maior retorno por menor risco e custo.</li>
+            </ol>
+            <p>A gestão elegante do seu dinheiro começa com a escolha de ferramentas que trabalham a seu favor. Nunca deixe seu cartão ser uma fonte de custos ocultos. Use a força dos seus gastos para gerar recompensa líquida.</p>
+        </section>
+        
+    </main>
+    
+    <div class="bloco-ads">[Bloco AdSense Rodapé - Bloco Responsivo]</div>
+
+    <footer>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">InvesJota</h4><p style="font-size: 0.9em;">Análise e precisão para o investidor clássico.</p></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Recursos</h4><a href="catalogo_calculadoras.html">Todas as Calculadoras</a><a href="juros_compostos.html">Juros Compostos</a><a href="calculadora_renda.html">Viver de Renda</a></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Legal</h4><a href="#">Termos de Uso</a><a href="#">Política de Privacidade</a></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Regra de Ouro</h4><p style="font-weight: bold; font-size: 1.1em;">"O tempo é o melhor amigo do dinheiro."</p></div>
+    </footer>
+
+
+    <script>
+        let graficoComparacao;
+        const corPrimaria = '#4B6F44'; // Verde Escuro
+        const corAcao = '#D4AF37';     // Dourado
+        
+        function compararCartoes() {
+            // Coleta de Dados
+            const c1 = {
+                nome: document.getElementById('nome1').value || "Cartão 1",
+                anuidade: parseFloat(document.getElementById('anuidade1').value) || 0,
+                juros: parseFloat(document.getElementById('juros1').value) || 0,
+                beneficio: parseFloat(document.getElementById('beneficio1').value) || 0.01 
+            };
+
+            const c2 = {
+                nome: document.getElementById('nome2').value || "Cartão 2",
+                anuidade: parseFloat(document.getElementById('anuidade2').value) || 0,
+                juros: parseFloat(document.getElementById('juros2').value) || 0,
+                beneficio: parseFloat(document.getElementById('beneficio2').value) || 0.01
+            };
+
+            // 1. Lógica de Ranqueamento
+            // Fórmula: (Custo Total) / (Benefício). Quanto mais baixo, melhor.
+            // Ponderação de Risco Rotativo: Multiplicador de 5x os juros anuais (simula o risco e custo alto)
+            const custo_total1 = c1.anuidade + (c1.juros * 5); 
+            const custo_total2 = c2.anuidade + (c2.juros * 5);
+
+            const custo_beneficio1 = custo_total1 / c1.beneficio;
+            const custo_beneficio2 = custo_total2 / c2.beneficio;
+
+            // 2. Determinação do Rank e Cores
+            let rank1, rank2;
+            let cor1, cor2;
+
+            if (custo_beneficio1 < custo_beneficio2) {
+                rank1 = 'Melhor (1º)';
+                rank2 = 'Pior (2º)';
+                cor1 = corAcao; // Dourado (melhor)
+                cor2 = corPrimaria; // Verde (pior)
+            } else if (custo_beneficio2 < custo_beneficio1) {
+                rank1 = 'Pior (2º)';
+                rank2 = 'Melhor (1º)';
+                cor1 = corPrimaria; // Verde
+                cor2 = corAcao; // Dourado
+            } else {
+                rank1 = rank2 = 'Empate';
+                cor1 = cor2 = '#808080';
+            }
+
+            // 3. Exibição na Tabela
+            document.getElementById('header-nome1').textContent = c1.nome;
+            document.getElementById('header-nome2').textContent = c2.nome;
+            document.getElementById('anuidade-res1').textContent = `R$ ${c1.anuidade.toFixed(2)}`;
+            document.getElementById('juros-res1').textContent = `${c1.juros.toFixed(2)}%`;
+            document.getElementById('beneficio-res1').textContent = `${c1.beneficio.toFixed(2)}%`;
+            document.getElementById('anuidade-res2').textContent = `R$ ${c2.anuidade.toFixed(2)}`;
+            document.getElementById('juros-res2').textContent = `${c2.juros.toFixed(2)}%`;
+            document.getElementById('beneficio-res2').textContent = `${c2.beneficio.toFixed(2)}%`;
+            document.getElementById('rank-res1').textContent = rank1;
+            document.getElementById('rank-res1').style.color = cor1;
+            document.getElementById('rank-res2').textContent = rank2;
+            document.getElementById('rank-res2').style.color = cor2;
+
+            // 4. Geração do Gráfico de Barras
+            if (graficoComparacao) { graficoComparacao.destroy(); }
+            const ctx = document.getElementById('graficoComparacao').getContext('2d');
+            
+            graficoComparacao = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [c1.nome, c2.nome],
+                    datasets: [
+                        {
+                            label: 'Anuidade (R$)',
+                            data: [c1.anuidade, c2.anuidade],
+                            backgroundColor: corPrimaria, 
+                            borderColor: corPrimaria,
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Benefício (Milhas/Cashback %)',
+                            data: [c1.beneficio, c2.beneficio],
+                            backgroundColor: corAcao, 
+                            borderColor: corAcao,
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: { display: true, text: 'Comparativo Visual: Custos (Anuidade) vs. Recompensa (Benefício)' }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            document.getElementById('resultado-comparacao').style.display = 'block';
+        }
+        
+        // Script para Scroll Animation
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 }); 
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>

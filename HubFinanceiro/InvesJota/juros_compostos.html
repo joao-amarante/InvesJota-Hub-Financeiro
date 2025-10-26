@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juros Compostos | InvesJota</title>
+    <link rel="stylesheet" href="assets/css/invesjota_base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .calculadora-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: var(--cor-secundaria);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--cor-primaria);
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid var(--cor-primaria);
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .resultado {
+            margin-top: 30px;
+            padding: 20px;
+            border-top: 2px solid var(--cor-acao);
+            background-color: #E6EAE4;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .resultado h3 {
+            color: var(--cor-primaria);
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        .resultado p {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+        /* Estilo para a Seção Educacional */
+        .conteudo-educativo {
+            margin-top: 50px;
+            padding: 25px;
+            border: 1px solid var(--cor-primaria);
+            border-radius: 6px;
+            background-color: var(--fundo-principal);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: left;
+        }
+        .conteudo-educativo h3 {
+            color: var(--cor-acao);
+            border-bottom: 2px solid var(--cor-primaria);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        .conteudo-educativo p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        .formula-box {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-left: 5px solid var(--cor-acao);
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="header-fixo">
+        <span class="logo-invesjota">InvesJota</span>
+        <nav class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="noticias.html">Notícias</a>
+            <a href="catalogo_calculadoras.html">Calculadoras</a>
+            <a href="juros_simples.html">Juros Simples</a>
+        </nav>
+    </div>
+
+    <div class="bloco-ads" style="margin-top: 60px;">[Bloco AdSense Topo/Banner - 728x90]</div>
+
+    <main style="padding: 20px; max-width: 1000px; margin: 0 auto;">
+        <h1 style="text-align: center;">Calculadora de Juros Compostos</h1>
+
+        <div class="calculadora-container fade-in">
+            <div class="form-group">
+                <label for="capital">Capital Inicial (R$):</label>
+                <input type="number" id="capital" value="10000" min="0">
+            </div>
+            <div class="form-group">
+                <label for="aporte">Aporte Mensal (R$):</label>
+                <input type="number" id="aporte" value="500" min="0">
+            </div>
+            <div class="form-group">
+                <label for="taxa">Taxa de Juros Anual (%):</label>
+                <input type="number" id="taxa" value="10" min="0">
+            </div>
+            <div class="form-group">
+                <label for="tempo">Período (Anos):</label>
+                <input type="number" id="tempo" value="20" min="1">
+            </div>
+            
+            <button class="btn-acao" onclick="calcularCompostos()">Calcular Projeção</button>
+
+            <div class="resultado" id="resultadoCompostos" style="display: none;">
+                <h3>Projeção Detalhada</h3>
+                <p>Montante Final: <span id="montanteFinal"></span></p>
+                <p>Total Investido (Capital + Aportes): <span id="totalInvestido"></span></p>
+                <p style="font-weight: bold;">Juros Ganhos: <span id="jurosGanhos"></span></p>
+            </div>
+        </div>
+        
+        <div style="width: 100%; margin-top: 30px;">
+            <canvas id="graficoCompostos" class="fade-in"></canvas>
+        </div>
+
+
+        <section class="conteudo-educativo fade-in">
+            <h2>O Poder Exponencial: Juros Compostos e a Acumulação de Riqueza</h2>
+            
+            <h3>Como a Calculadora Projeta o Seu Futuro</h3>
+            <p>Esta calculadora simula o crescimento do seu capital usando a regra mais poderosa do mercado: os juros compostos. Diferente dos juros simples, que crescem linearmente, os compostos adicionam os lucros de cada período ao valor principal, fazendo com que o montante cresça de forma exponencial. O gráfico gerado ilustra essa curva: o crescimento lento no início, mas que se acelera dramaticamente nos anos finais.</p>
+            <p>O cálculo é feito mês a mês para incluir a complexidade dos aportes regulares. A taxa anual que você insere é dividida por 12 (taxa mensal) e o período é convertido para meses. A cada ciclo, os juros são calculados sobre o valor total acumulado até o momento, e só depois o seu novo aporte é adicionado.</p>
+            <p><strong>A Fórmula Mês a Mês:</strong> $M_{n} = M_{n-1} \times (1 + i) + Aporte$. Este é o segredo da projeção. Onde $M_{n}$ é o montante do mês atual, $M_{n-1}$ é o montante do mês anterior e $i$ é a taxa mensal.</p>
+
+            <h3>O Fator Tempo: O Aliado Silencioso do Investidor</h3>
+            <p>Se você perguntar a qualquer investidor experiente qual é o fator mais importante para a riqueza, ele não dirá "taxa de juros alta", mas sim **"tempo"**. O tempo de maturação do capital é o que transforma pequenos aportes em grandes fortunas. No nosso gráfico, a diferença entre a linha do "Total Investido" (o dinheiro que saiu do seu bolso) e a linha do "Montante Final" (o dinheiro que o mercado gerou) é o seu lucro puro. Essa diferença é mínima nos primeiros cinco anos e explode após a marca de 15 anos, mostrando que o tempo começa a trabalhar para você de forma agressiva.</p>
+            <p>O maior erro que um novo investidor comete é subestimar o poder de **começar cedo**. Uma pessoa que investe R$ 500 por mês dos 20 aos 30 anos e depois para, geralmente, terá um patrimônio maior aos 60 anos do que alguém que começou a investir R$ 500 por mês apenas aos 35 anos e continuou até os 60. Isso acontece porque o capital inicial teve mais tempo para se beneficiar da fase exponencial dos juros.</p>
+
+            <h3>Como Usar a Calculadora para Decisões (Aportes vs. Taxa)</h3>
+            <p>A ferramenta serve para identificar suas alavancas de crescimento. Existem dois vetores principais:</p>
+            <ol>
+                <li><strong>Aporte Mensal:</strong> A variável que você controla. Aumentar o aporte em R$ 100 hoje tem um efeito garantido e imediato.</li>
+                <li><strong>Taxa de Retorno:</strong> Controlada pela sua estratégia de alocação de ativos (risco). Buscar uma taxa mais alta exige mais risco (ex: maior porcentagem em Renda Variável).</li>
+            </ol>
+            <p>Use a calculadora para responder a perguntas cruciais: *Se eu aumentar meu aporte em 10% por ano, quanto tempo eu economizo?* ou *Se eu focar em um investimento mais arriscado que me dê 2% a mais de retorno, qual será o impacto final?* A visualização do gráfico com duas linhas (o que você investiu vs. o que você ganhou) é a prova visual de que, no longo prazo, **seu dinheiro ganha mais dinheiro do que você**. Esse é o objetivo final de dominar os juros compostos.</p>
+            <p style="font-weight: bold; color: var(--cor-acao);"><i class="fas fa-chart-bar"></i> Conclusão InvesJota: O capital inicial e os aportes são a fundação (Juros Simples), mas o tempo e a taxa de retorno são a aceleração (Juros Compostos). Maximize o tempo e minimize o risco para uma rentabilidade sólida.</p>
+        </section>
+        
+    </main>
+    
+    <div class="bloco-ads">[Bloco AdSense Rodapé - Bloco Responsivo]</div>
+
+    <footer>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">InvesJota</h4><p style="font-size: 0.9em;">Análise e precisão para o investidor clássico.</p></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Recursos</h4><a href="catalogo_calculadoras.html">Todas as Calculadoras</a><a href="juros_compostos.html">Juros Compostos</a><a href="calculadora_renda.html">Viver de Renda</a></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Legal</h4><a href="#">Termos de Uso</a><a href="#">Política de Privacidade</a></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Regra de Ouro</h4><p style="font-weight: bold; font-size: 1.1em;">"O tempo é o melhor amigo do dinheiro."</p></div>
+    </footer>
+
+
+    <script>
+        let graficoCompostos;
+        const corPrimaria = '#4B6F44'; // Verde Escuro
+        const corAcao = '#D4AF37';     // Dourado
+
+        function calcularCompostos() {
+            const C = parseFloat(document.getElementById('capital').value) || 0;
+            const A = parseFloat(document.getElementById('aporte').value) || 0;
+            const taxa_anual = parseFloat(document.getElementById('taxa').value) / 100 || 0;
+            const Anos = parseInt(document.getElementById('tempo').value) || 0;
+            
+            if (Anos <= 0 || (C === 0 && A === 0)) {
+                 alert("Insira um período válido e algum capital ou aporte.");
+                 return;
+            }
+
+            const taxa_mensal = taxa_anual / 12;
+            const meses_totais = Anos * 12;
+
+            let montante = C;
+            let total_investido = C;
+            let dados_grafico_investido = [C];
+            let dados_grafico_montante = [C];
+            let labels = [0]; // Mês 0
+            
+            // Simulação mês a mês
+            for (let m = 1; m <= meses_totais; m++) {
+                montante *= (1 + taxa_mensal);
+                montante += A;
+                total_investido += A;
+
+                // Registra dados anuais ou a cada 5 anos para não sobrecarregar o gráfico
+                if (m % 12 === 0 || m % 60 === 0) { 
+                    dados_grafico_investido.push(total_investido);
+                    dados_grafico_montante.push(montante);
+                    labels.push(m);
+                }
+            }
+
+            // Garante que o último ponto seja o final da projeção
+            if (labels[labels.length - 1] !== meses_totais) {
+                dados_grafico_investido.push(total_investido);
+                dados_grafico_montante.push(montante);
+                labels.push(meses_totais);
+            }
+
+
+            const jurosGanhos = montante - total_investido;
+            const formatador = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+            
+            // 1. Atualiza o resultado
+            document.getElementById('montanteFinal').textContent = formatador.format(montante);
+            document.getElementById('totalInvestido').textContent = formatador.format(totalInvestido);
+            document.getElementById('jurosGanhos').textContent = formatador.format(jurosGanhos);
+
+            // 2. Destrói e recria o gráfico
+            if (graficoCompostos) { graficoCompostos.destroy(); }
+            const ctx = document.getElementById('graficoCompostos').getContext('2d');
+
+            graficoCompostos = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels.map(l => l === 0 ? 'Início' : `Ano ${l/12}`),
+                    datasets: [
+                        {
+                            label: 'Total Investido',
+                            data: dados_grafico_investido,
+                            borderColor: corPrimaria,
+                            backgroundColor: 'rgba(75, 111, 68, 0.2)',
+                            fill: false,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Montante Final',
+                            data: dados_grafico_montante,
+                            borderColor: corAcao,
+                            backgroundColor: 'transparent',
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: { 
+                    responsive: true, 
+                    plugins: {
+                        title: { display: true, text: 'Projeção de Crescimento do Capital (Juros Compostos)' }
+                    },
+                    scales: { 
+                        y: { 
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return formatador.format(value).replace('R$', 'R$');
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const valor = context.parsed.y;
+                                    return `Montante: ${formatador.format(valor)}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            document.getElementById('resultadoCompostos').style.display = 'block';
+        }
+
+        // Script para Scroll Animation
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0.1 }); 
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>

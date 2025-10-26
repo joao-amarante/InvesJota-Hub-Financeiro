@@ -1,1 +1,0 @@
-# InvesJota-Hub-Financeiro

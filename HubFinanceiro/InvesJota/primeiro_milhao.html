@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta Primeiro Milhão | InvesJota</title>
+    <link rel="stylesheet" href="assets/css/invesjota_base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .calculadora-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: var(--cor-secundaria);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--cor-primaria);
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid var(--cor-primaria);
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .resultado {
+            margin-top: 30px;
+            padding: 20px;
+            border-top: 2px solid var(--cor-acao);
+            background-color: #E6EAE4;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .resultado h3 {
+            color: var(--cor-acao);
+            font-size: 2.5em;
+            margin-top: 10px;
+        }
+        .resultado p {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        /* Estilo para a Seção Educacional */
+        .conteudo-educativo {
+            margin-top: 50px;
+            padding: 25px;
+            border: 1px solid var(--cor-primaria);
+            border-radius: 6px;
+            background-color: var(--fundo-principal);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: left;
+        }
+        .conteudo-educativo h3 {
+            color: var(--cor-acao);
+            border-bottom: 2px solid var(--cor-primaria);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        .conteudo-educativo p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="header-fixo">
+        <span class="logo-invesjota">InvesJota</span>
+        <nav class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="noticias.html">Notícias</a>
+            <a href="catalogo_calculadoras.html">Calculadoras</a>
+            <a href="juros_simples.html">Juros Simples</a>
+        </nav>
+    </div>
+
+    <div class="bloco-ads" style="margin-top: 60px;">[Bloco AdSense Topo/Banner - 728x90]</div>
+
+    <main style="padding: 20px; max-width: 1000px; margin: 0 auto;">
+        <h1 style="text-align: center;">Calculadora: Quanto Tempo para o Primeiro Milhão?</h1>
+
+        <div class="calculadora-container fade-in">
+            <div class="form-group">
+                <label for="capital_inicial">Capital Inicial (R$):</label>
+                <input type="number" id="capital_inicial" value="10000" min="0">
+            </div>
+            <div class="form-group">
+                <label for="aporte_mensal">Aporte Mensal Desejado (R$):</label>
+                <input type="number" id="aporte_mensal" value="1000" min="0">
+            </div>
+            <div class="form-group">
+                <label for="taxa_anual">Taxa de Retorno Anual Esperada (%):</label>
+                <input type="number" id="taxa_anual" value="12" min="1">
+            </div>
+            
+            <button class="btn-acao" onclick="calcularPrimeiroMilhao()">Calcular Projeção</button>
+            
+            <div class="resultado" id="resultado-milhao" style="display:none;">
+                <p>Você atingirá R$ 1.000.000,00 em:</p>
+                <h3 id="tempo_em_anos_meses"></h3>
+                <p>(Total de meses: <span id="total_meses_raw"></span>)</p>
+            </div>
+        </div>
+        
+        <div style="width: 100%; margin-top: 30px;">
+            <canvas id="graficoMilhao" class="fade-in"></canvas>
+        </div>
+
+
+        <section class="conteudo-educativo fade-in">
+            <h2 style="color: var(--cor-primaria); text-align: center;">Decifrando a Meta Milionária: Tempo, Aportes e Juros</h2>
+            
+            <h3>A Lógica da Simulação: As Variáveis da Riqueza</h3>
+            <p>O gráfico e o cálculo desta página demonstram o princípio do crescimento exponencial. O montante não cresce em linha reta, pois a cada mês, os juros são aplicados sobre um capital maior, o que acelera drasticamente o processo (Juros Compostos).</p>
+            <p><strong>A Variável Mais Crítica é a Taxa de Retorno.</strong> Embora o aporte seja importante, no longo prazo, a diferença entre 8% e 12% de retorno anual pode significar uma década a menos para atingir o milhão. Um pequeno aumento na taxa de retorno tem um impacto massivo no tempo total necessário. É o famoso "efeito bola de neve".</p>
+            <p><strong>A Fórmula na Prática:</strong> A calculadora simula, mês a mês, a seguinte operação: $Montante_{Novo} = (Montante_{Antigo} \times (1 + Taxa_{Mensal})) + Aporte_{Mensal}$. O loop se repete até que o $Montante$ ultrapasse a marca de R$ 1.000.000,00.</p>
+            
+            <h3>Como Otimizar Seu Tempo até o Milhão</h3>
+            <p>Para o investidor que busca a meta do milhão, existem três alavancas principais que controlam o tempo de conclusão da jornada:</p>
+            <ol>
+                <li><strong>Aporte Mensal (A):</strong> É a variável que você mais controla no curto prazo. Aumentar o aporte em R$ 100 hoje tem um efeito garantido e imediato na redução do seu tempo.</li>
+                <li><strong>Taxa de Retorno (T):</strong> Controlada pela sua estratégia de investimento (Renda Fixa vs. Variável, risco). Buscar uma taxa maior exige migrar de investimentos mais seguros para ativos com maior potencial de crescimento, como ações ou fundos imobiliários. É onde o risco se encontra com a recompensa.</li>
+                <li><strong>Capital Inicial (C):</strong> É o ponto de partida. Quanto maior o capital inicial, menos tempo os aportes e os juros precisam trabalhar. Pagar dívidas e maximizar o capital inicial é sempre o melhor primeiro passo.</li>
+            </ol>
+            <p style="font-weight: bold; color: var(--cor-acao);"><i class="fas fa-money-bill-wave"></i> Dica de Projeção: Se a sua projeção mostra mais de 25 anos para o milhão, você deve focar em aumentar a Taxa de Retorno (mais Renda Variável) ou buscar formas de aumentar o Aporte Mensal (melhorar a renda ativa).</p>
+            
+            <h3>O Papel da Consistência e do Risco</h3>
+            <p>Muitas pessoas olham para o gráfico e se desmotivam porque o crescimento é lento nos primeiros anos. Isso é normal! O gráfico mostra claramente que a curva se acentua de forma dramática apenas na segunda metade da projeção, quando os juros acumulados começam a superar o valor dos seus aportes mensais.</p>
+            <p>**Consistência é a Chave:** O Aporte Mensal deve ser encarado como uma dívida consigo mesmo. Interromper o aporte ou parar de investir destrói o poder da acumulação composta, jogando a data do seu milhão para frente.</p>
+            <p>**Risco e Retorno:** Para alcançar taxas de 10% ou 12% anuais consistentemente, é inevitável que você tenha que tolerar o risco da renda variável. O Milhão não é atingido em ativos superconservadores. O gráfico é uma ferramenta de motivação, mostrando que a disciplina de hoje compensa exponencialmente amanhã, transformando o tempo no seu maior aliado na jornada para a liberdade financeira.</p>
+            <p>Use esta calculadora para testar cenários: como o seu tempo muda se você aumentar o aporte em R$ 50? E se você conseguir 1% a mais de rentabilidade? Essas respostas guiarão suas decisões mais importantes no mercado.</p>
+        </section>
+        
+    </main>
+    
+    <div class="bloco-ads">[Bloco AdSense Rodapé - Bloco Responsivo]</div>
+
+    <footer>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">InvesJota</h4><p style="font-size: 0.9em;">Análise e precisão para o investidor clássico.</p></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Recursos</h4><a href="catalogo_calculadoras.html">Todas as Calculadoras</a><a href="juros_compostos.html">Juros Compostos</a><a href="calculadora_renda.html">Viver de Renda</a></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Legal</h4><a href="#">Termos de Uso</a><a href="#">Política de Privacidade</a></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Regra de Ouro</h4><p style="font-weight: bold; font-size: 1.1em;">"O tempo é o melhor amigo do dinheiro."</p></div>
+    </footer>
+
+
+    <script>
+        let graficoMilhao;
+        const corPrimaria = '#4B6F44'; // Verde Escuro
+        const corAcao = '#D4AF37';     // Dourado
+        const META = 1000000;
+
+        function calcularPrimeiroMilhao() {
+            let C = parseFloat(document.getElementById('capital_inicial').value);
+            const A = parseFloat(document.getElementById('aporte_mensal').value);
+            const T_anual = parseFloat(document.getElementById('taxa_anual').value) / 100;
+            
+            const taxa_mensal = T_anual / 12;
+            let meses = 0;
+            
+            if (A <= 0 || T_anual <= 0 || isNaN(C)) {
+                 alert("Todos os campos devem ser preenchidos com valores positivos para a projeção.");
+                 return;
+            }
+
+            // Variáveis para o Gráfico
+            let montantes_projecao = [C];
+            let labels_projecao = [0];
+            
+            // Simulação Mês a Mês (Loop)
+            const MAX_MESES = 5000;
+
+            while (C < META && meses < MAX_MESES) { 
+                
+                C *= (1 + taxa_mensal);
+                C += A;
+                meses++;
+                
+                // Registra pontos para o gráfico a cada 12 meses (ou no início)
+                if (meses % 12 === 0 || meses === 1) {
+                    montantes_projecao.push(C);
+                    labels_projecao.push(meses);
+                }
+            }
+            
+            // Garante que a meta atingida seja o último ponto do gráfico
+            if (C >= META && montantes_projecao[montantes_projecao.length - 1] < META) {
+                montantes_projecao.push(META); 
+                labels_projecao.push(meses);
+            }
+
+            // 3. Formatação do Tempo
+            const anos = Math.floor(meses / 12);
+            const meses_restantes = meses % 12;
+            
+            let tempo_formatado;
+            if (meses >= MAX_MESES) {
+                tempo_formatado = "Mais de 416 Anos (Ajuste Aporte/Taxa Insuficientes)";
+            } else if (anos > 0) {
+                tempo_formatado = `${anos} Anos e ${meses_restantes} Meses`;
+            } else {
+                tempo_formatado = `${meses} Meses`;
+            }
+
+            // 4. Geração do Gráfico de Linha
+            if (graficoMilhao) { graficoMilhao.destroy(); }
+            const ctx = document.getElementById('graficoMilhao').getContext('2d');
+            
+            const formatador = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+
+            if (typeof Chart !== 'undefined') {
+                graficoMilhao = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels_projecao.map(l => l === 0 ? 'Início' : (l % 12 === 0 ? `Ano ${l/12}` : l)),
+                        datasets: [
+                            {
+                                label: 'Projeção do Montante',
+                                data: montantes_projecao,
+                                borderColor: corPrimaria,
+                                backgroundColor: 'rgba(75, 111, 68, 0.2)',
+                                fill: true,
+                                tension: 0.3
+                            },
+                            {
+                                label: `Meta de R$ ${META.toLocaleString('pt-BR')}`,
+                                data: new Array(montantes_projecao.length).fill(META),
+                                borderColor: corAcao,
+                                borderDash: [5, 5],
+                                pointRadius: 0,
+                                fill: false,
+                            }
+                        ]
+                    },
+                    options: { 
+                        responsive: true, 
+                        scales: { y: { beginAtZero: true } },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const valor = context.parsed.y;
+                                        return formatador.format(valor);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 5. Exibir Resultados
+            document.getElementById('tempo_em_anos_meses').textContent = tempo_formatado;
+            document.getElementById('total_meses_raw').textContent = meses;
+            document.getElementById('resultado-milhao').style.display = 'block';
+        }
+
+        // Script para Scroll Animation
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0.1 }); 
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>

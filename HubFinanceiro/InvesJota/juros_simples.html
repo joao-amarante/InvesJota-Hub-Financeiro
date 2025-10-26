@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juros Simples | InvesJota</title>
+    <link rel="stylesheet" href="assets/css/invesjota_base.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .calculadora-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--cor-primaria);
+            border-radius: 4px;
+        }
+        .resultado-container {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #E6EAE4;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .resultado-container h2 {
+            color: var(--cor-acao);
+            text-align: center;
+        }
+        .conteudo-educativo {
+            margin-top: 50px;
+            padding: 20px;
+            border: 1px solid var(--cor-primaria);
+            border-radius: 6px;
+            background-color: var(--cor-secundaria);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .conteudo-educativo h3 {
+            color: var(--cor-primaria);
+            border-bottom: 2px solid var(--cor-acao);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        .formula-box {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-left: 5px solid var(--cor-acao);
+            font-family: monospace;
+            overflow-x: auto;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-fixo">
+        <span class="logo-invesjota">InvesJota</span>
+        <nav class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="noticias.html">Notícias</a>
+            <a href="catalogo_calculadoras.html">Calculadoras</a>
+            <a href="juros_simples.html">Juros Simples</a>
+        </nav>
+    </div>
+
+    <div class="bloco-ads" style="margin-top: 60px;">[Bloco AdSense Topo/Banner - 728x90]</div>
+
+    <main style="padding: 20px; max-width: 900px; margin: 0 auto;">
+        <h1>Calculadora de Juros Simples</h1>
+        <p>Use esta ferramenta para calcular acréscimos lineares, como multas e juros lineares.</p>
+
+        <div class="calculadora-form">
+            <label for="principal">Capital Principal (R$):</label>
+            <input type="number" id="principal" value="1000">
+
+            <label for="taxa">Taxa de Juros (ao ano - %):</label>
+            <input type="number" id="taxa" value="10">
+
+            <label for="tempo">Período (Anos):</label>
+            <input type="number" id="tempo" value="5">
+
+            <button class="btn-acao" onclick="calcularJurosSimples()">Calcular Projeção</button>
+        </div>
+
+        <div id="resultado-simples" class="resultado-container" style="display:none;">
+            <h2>Projeção Financeira</h2>
+            <p style="text-align: center;">Montante Final após <span id="tempo-total"></span> anos: <strong style="font-size: 1.5em;" id="montante-simples-final">R$ 0.00</strong></p>
+            <p style="text-align: center;">Juros Totais Acumulados: <strong id="juros-simples-total">R$ 0.00</strong></p>
+            
+            <div style="width: 100%; margin-top: 30px;">
+                <canvas id="graficoJurosSimples"></canvas>
+            </div>
+        </div>
+
+        <section class="conteudo-educativo">
+            <h2>Dominando os Juros Simples</h2>
+
+            <h3>1. Como Utilizar a Calculadora</h3>
+            <p>Os Juros Simples são calculados de forma linear, ou seja, o juro incide sempre sobre o valor inicial. Preencha os campos:</p>
+            <ol>
+                <li><strong>Capital Principal:</strong> O valor inicial (o empréstimo, a multa ou o investimento).</li>
+                <li><strong>Taxa de Juros (ao ano - %):</strong> A porcentagem de juros aplicada ao ano.</li>
+                <li><strong>Período (Anos):</strong> A duração total da operação.</li>
+            </ol>
+            <p>O gráfico mostrará o Montante Total (Principal + Juros) crescendo ano a ano de forma constante.</p>
+
+            <h3>2. O Cálculo e Onde é Aplicado</h3>
+            <p>A fórmula do Juros Simples é a mais básica e demonstra um crescimento aritmético. O total de juros é determinado pela simples multiplicação do Principal pela Taxa pelo Tempo.</p>
+            
+            <p><strong>Fórmula:</strong></p>
+            <div class="formula-box">
+                J = P * i * t<br>
+                M = P + J
+            </div>
+            <p>Onde J é Juros, P é Principal, i é a Taxa (em decimal) e t é o Tempo (na mesma unidade da taxa).</p>
+            
+            <p><strong>Aplicações:</strong> Juros Simples é usado principalmente em:</p>
+            <ul>
+                <li>Multas e atrasos de curto prazo.</li>
+                <li>Alguns empréstimos pessoais e financiamentos específicos que definem taxas fixas sobre o principal.</li>
+            </ul>
+
+            <h3>3. Juros Simples vs. Juros Compostos (A Diferença Crucial)</h3>
+            <p>Esta é a distinção mais importante para um investidor:</p>
+            
+            <p><strong>Juros Simples (Crescimento Linear):</strong></p>
+            <ul>
+                <li>O juro é sempre calculado sobre o **Principal Inicial**.</li>
+                <li>Seu dinheiro cresce de forma constante, mas lenta.</li>
+            </ul>
+
+            <p><strong>Juros Compostos (Crescimento Exponencial):</strong></p>
+            <ul>
+                <li>O juro é calculado sobre o **Montante Atual** (Principal + Juros acumulados).</li>
+                <li>Seu dinheiro cresce de forma acelerada (juros sobre juros). É a base de todo o investimento de sucesso a longo prazo.</li>
+            </ul>
+        </section>
+        </main>
+
+    <div class="bloco-ads">[Bloco AdSense Rodapé - Bloco Responsivo]</div>
+
+    <script>
+        let graficoJurosSimples;
+        const corPrimaria = '#4B6F44'; // Verde Escuro
+        const corAcao = '#D4AF37';     // Dourado
+
+        function calcularJurosSimples() {
+            const P = parseFloat(document.getElementById('principal').value);
+            const T_anual = parseFloat(document.getElementById('taxa').value) / 100;
+            const t = parseInt(document.getElementById('tempo').value);
+
+            if (isNaN(P) || isNaN(T_anual) || isNaN(t) || P <= 0 || T_anual < 0 || t <= 0) {
+                 alert("Por favor, insira valores válidos e positivos.");
+                 return;
+            }
+
+            // 1. Cálculo Principal
+            const Juros = P * T_anual * t;
+            const Montante = P + Juros;
+            
+            // 2. Geração de Dados para o Gráfico (Ano a Ano)
+            let montantes = [];
+            let anos = [];
+            const juros_por_ano = P * T_anual;
+
+            for (let i = 0; i <= t; i++) {
+                anos.push(i);
+                montantes.push(P + (juros_por_ano * i));
+            }
+
+            // 3. Destruir e Recriar Gráfico
+            if (graficoJurosSimples) { graficoJurosSimples.destroy(); }
+            const ctx = document.getElementById('graficoJurosSimples').getContext('2d');
+            
+            const formatador = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+
+            graficoJurosSimples = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: anos.map(a => a === 0 ? 'Início' : `Ano ${a}`),
+                    datasets: [
+                        {
+                            label: 'Montante Final (Juros Simples)',
+                            data: montantes,
+                            borderColor: corPrimaria,
+                            backgroundColor: 'rgba(75, 111, 68, 0.2)',
+                            fill: true,
+                            tension: 0, // Crescimento linear = linha reta
+                        }
+                    ]
+                },
+                options: { 
+                    responsive: true, 
+                    title: { display: true, text: 'Crescimento Linear do Montante' },
+                    scales: { 
+                        y: { 
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return formatador.format(value).replace('R$', 'R$');
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const valor = context.parsed.y;
+                                    return `R$ ${valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 4. Exibir Resultados
+            document.getElementById('juros-simples-total').textContent = formatador.format(Juros);
+            document.getElementById('montante-simples-final').textContent = formatador.format(Montante);
+            document.getElementById('tempo-total').textContent = t;
+            
+            document.getElementById('resultado-simples').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+/* ARQUIVO: invesjota_base.css - TEMA: LUXURY MINIMALIST (ORIGINAL + DARK MODE) */
+
+/* ======================================================= */
+/* 1. VARIÁVEIS DO TEMA CLARO (Padrão: Preto, Ouro, Branco) */
+/* ======================================================= */
+:root {
+    --fundo-principal: #FAFAFA;        /* Branco Puro (Topo) */
+    --fundo-degrade-end: #F0F0F0;      /* Cinza Muito Claro (Base do Degrade) */
+    --cor-texto: #191919;             /* Preto Carvão (Texto Principal) */
+    --cor-acao: #B8860B;              /* Ouro Polido (Ação e Destaque) */
+    --cor-suave: #E0E0E0;             /* Cinza Claro Suave (Bordas e Fundos de Cards) */
+    --cor-contraste: #191919;         /* Preto Carvão (Headers) */
+    --texto-claro: #FFFFFF;
+    --cor-secundaria-decor: #008080;  /* Verde Esmeralda (Decoração/Sutileza) */
+}
+
+/* ======================================================= */
+/* 2. VARIÁVEIS DO TEMA ESCURO (Dark Mode: Preto, Ouro, Verde) */
+/* ======================================================= */
+[data-theme="dark"] {
+    --fundo-principal: #121212;        /* Preto Suave (Topo) */
+    --fundo-degrade-end: #000000;      /* Preto Puro (Base do Degrade) */
+    --cor-texto: #E0E0E0;             /* Cinza Claro Suave (Texto Principal) */
+    --cor-acao: #FFD700;              /* Ouro Puro (Ação e Destaque no Dark) */
+    --cor-suave: #2A2A2A;             /* Cinza Escuro Suave (Bordas e Fundos de Cards) */
+    --cor-contraste: #FFFFFF;         /* Branco Puro (Headers) */
+    --texto-claro: #121212;           /* Texto em botão de fundo claro */
+    --cor-secundaria-decor: #00C0C0;  /* Verde Água (Decoração/Sutileza no Dark) */
+}
+
+/* ======================================================= */
+/* 3. ESTILOS GERAIS E DEGRADÊ (Aplicados ao Body) */
+/* ======================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--cor-texto);
+    margin: 0;
+    padding-top: 65px; 
+    transition: all 0.5s ease;
+    
+    /* === DEGRADÊ LATERAL INFERIOR PARA SUPERIOR === */
+    background: linear-gradient(to top right, var(--fundo-degrade-end) 0%, var(--fundo-principal) 40%); 
+    background-attachment: fixed;
+}
+
+h1, h2, h3 {
+    font-family: 'Lora', serif;
+    color: var(--cor-contraste);
+    font-weight: 700;
+    transition: color 0.5s;
+}
+
+/* HEADER FIXO */
+.header-fixo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    background-color: var(--fundo-principal); 
+    border-bottom: 2px solid var(--cor-acao); /* Linha Dourada */
+    color: var(--cor-texto);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: background-color 0.5s, border-bottom-color 0.5s, color 0.5s;
+}
+
+.logo-invesjota {
+    font-size: 1.8em;
+    color: var(--cor-acao); /* Dourado */
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    transition: color 0.5s;
+}
+
+.nav-links a {
+    color: var(--cor-texto);
+    text-decoration: none;
+    margin-left: 30px;
+    font-weight: 400;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--cor-acao); /* Dourado no Hover */
+    border-bottom: 1px solid var(--cor-acao);
+}
+
+/* BOTÕES GERAIS (Ação - Ouro Polido) */
+.btn-acao {
+    background-color: var(--cor-acao); /* Fundo Dourado */
+    color: var(--texto-claro); /* Texto Branco */
+    border: none;
+    padding: 12px 25px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+/* Microinteração - Botão Dourado com Borda Escura (mais chique) */
+.btn-acao:hover {
+    background-color: var(--cor-suave); /* Fundo Suave no hover */
+    color: var(--cor-contraste); /* Texto preto/branco para contraste */
+    border: 1px solid var(--cor-acao); /* Borda Dourada */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* CARDS E BLOCOS */
+.calculadora-card {
+    background-color: var(--fundo-principal); 
+    border: 1px solid var(--cor-suave);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.calculadora-card:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--cor-acao); /* Borda Dourada no hover */
+}
+
+.calculadora-card i {
+    color: var(--cor-acao); /* Ícones Dourados */
+}
+
+/* BLOCOS ADSENESE */
+.bloco-ads {
+    background-color: var(--cor-suave); /* Cinza Claro/Escuro Suave */
+    padding: 15px;
+    border: none;
+    color: var(--cor-texto); /* Texto em contraste com o fundo */
+    transition: background-color 0.5s, color 0.5s;
+}
+
+/* Scroll Animation (mantido) */
+.fade-in {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ESTILOS DE FOOTER */
+footer {
+    background-color: var(--cor-contraste); /* Preto/Branco */
+    color: var(--texto-claro); /* Branco/Preto */
+    border-top: 5px solid var(--cor-acao); /* Dourado */
+    transition: background-color 0.5s, border-top-color 0.5s, color 0.5s;
+}
+footer a {
+    color: var(--cor-suave);
+    transition: color 0.5s;
+}
+footer a:hover {
+    color: var(--cor-acao);
+}
+
+@media (max-width: 768px) {
+    .header-fixo {
+        height: 60px;
+        padding: 0 15px;
+    }
+}
