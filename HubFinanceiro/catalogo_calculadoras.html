@@ -14,17 +14,17 @@
             margin-top: 40px;
         }
         .calculadora-card {
-            background-color: var(--cor-secundaria); 
-            padding: 25px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            background-color: var(--fundo-principal); 
+            border: 1px solid var(--cor-suave);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             cursor: pointer;
             
-            /* Classe para o Fade-in */
             opacity: 0;
             transform: translateY(20px);
             transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.8s ease-out, transform 0.8s ease-out;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
         }
         .calculadora-card.visible {
             opacity: 1;
@@ -32,23 +32,28 @@
         }
         .calculadora-card:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--cor-acao);
         }
         .calculadora-card i {
             font-size: 3em;
-            color: var(--cor-primaria);
+            color: var(--cor-acao);
             margin-bottom: 15px;
         }
     </style>
 </head>
-<body>
+<body data-theme="light">
     <div class="header-fixo">
         <span class="logo-invesjota">InvesJota</span>
         <nav class="nav-links">
-            <a href="home.html">Home</a>
+            <a href="index.html">Home</a>
             <a href="noticias.html">Notícias</a>
             <a href="catalogo_calculadoras.html">Calculadoras</a>
             <a href="juros_simples.html">Juros Simples</a>
+            
+            <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i> 
+            </button>
         </nav>
     </div>
 
@@ -102,6 +107,7 @@
     <div class="bloco-ads">[Bloco AdSense Rodapé - Bloco Responsivo]</div>
 
     <script>
+        // Script para Scroll Animation
         const cardObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -113,6 +119,30 @@
 
         document.querySelectorAll('.calculadora-card').forEach(element => {
             cardObserver.observe(element);
+        });
+
+        // LÓGICA DO TOGGLE DE TEMA (Repetida em todos os arquivos)
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const icon = document.getElementById('theme-toggle').querySelector('i');
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+                const icon = document.getElementById('theme-toggle').querySelector('i');
+                icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+            }
         });
     </script>
 </body>

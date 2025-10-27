@@ -15,7 +15,7 @@
             margin-top: 30px;
         }
         .noticia-card {
-            background-color: var(--cor-secundaria);
+            background-color: var(--cor-suave);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -28,28 +28,40 @@
         .noticia-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--cor-acao);
         }
         .noticia-card h3 {
             font-size: 1.2em;
-            color: var(--cor-primaria);
+            color: var(--cor-contraste);
             margin-top: 0;
-            border-bottom: 1px solid var(--cor-primaria);
+            border-bottom: 1px solid var(--cor-acao);
             padding-bottom: 5px;
+        }
+        .noticia-card p {
+             color: var(--cor-texto);
         }
         .noticia-card a {
             align-self: flex-start;
             margin-top: 15px;
         }
+        /* Corrigir o estilo de carregamento para usar as cores do tema */
+        #feed-noticias p {
+            color: var(--cor-texto);
+        }
     </style>
 </head>
-<body>
+<body data-theme="light">
     <div class="header-fixo">
         <span class="logo-invesjota">InvesJota</span>
         <nav class="nav-links">
-            <a href="home.html">Home</a>
+            <a href="index.html">Home</a>
             <a href="noticias.html">Notícias</a>
             <a href="catalogo_calculadoras.html">Calculadoras</a>
             <a href="juros_simples.html">Juros Simples</a>
+            
+            <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i> 
+            </button>
         </nav>
     </div>
 
@@ -57,7 +69,7 @@
 
     <main style="padding: 20px; max-width: 1200px; margin: 0 auto;">
         <h1>Feed Dinâmico de Notícias Financeiras</h1>
-        <p>Análise de mercado atualizada, gerada a partir de dados de fontes confiáveis.</p>
+        <p style="color: var(--cor-texto);">Análise de mercado atualizada, gerada a partir de dados de fontes confiáveis.</p>
         
         <div class="bloco-ads">[Bloco AdSense In-Content - Abaixo do Título]</div>
 
@@ -76,7 +88,6 @@
 
     <script>
         // SIMULAÇÃO DA CHAMADA DE API E GERAÇÃO DE CONTEÚDO
-        // A chave 'resumo' simula o conteúdo reescrito/filtrado pela IA.
         const noticiasSimuladas = [
             { 
                 titulo: "A Taxa Selic e o Novo Ciclo de Quedas: Impacto na Renda Fixa", 
@@ -100,28 +111,6 @@
             },
         ];
 
-        function renderizarFeed(isUpdate = false) {
-            const feedContainer = document.getElementById('feed-noticias');
-            feedContainer.innerHTML = '';
-            
-            if (isUpdate) {
-                // Simulação de carregamento da API
-                feedContainer.innerHTML = '<p style="text-align: center; color: var(--cor-primaria);">Buscando novas análises (Simulação)...</p>';
-                setTimeout(() => {
-                    // Adiciona uma notícia nova (simulada) no topo em caso de atualização
-                    const novaNoticia = {
-                        titulo: "Análise Exclusiva: As 3 Ações Mais Sólidas para o Próximo Trimestre",
-                        resumo: "Nossa IA analisou os balanços e fluxos de caixa e identificou oportunidades de investimento de longo prazo, com foco em valor intrínseco e governança.",
-                        link: "#"
-                    };
-                    const feedAtualizado = [novaNoticia, ...noticiasSimuladas];
-                    exibirCards(feedAtualizado);
-                }, 1000);
-            } else {
-                exibirCards(noticiasSimuladas);
-            }
-        }
-
         function exibirCards(noticiasArray) {
              const feedContainer = document.getElementById('feed-noticias');
              feedContainer.innerHTML = ''; // Limpa antes de exibir
@@ -140,37 +129,54 @@
             });
         }
 
-        // Carrega o feed inicial ao carregar a página
+        function renderizarFeed(isUpdate = false) {
+            const feedContainer = document.getElementById('feed-noticias');
+            feedContainer.innerHTML = '';
+            
+            if (isUpdate) {
+                feedContainer.innerHTML = '<p style="text-align: center; color: var(--cor-texto);">Buscando novas análises (Simulação)...</p>';
+                setTimeout(() => {
+                    const novaNoticia = {
+                        titulo: "Análise Exclusiva: As 3 Ações Mais Sólidas para o Próximo Trimestre",
+                        resumo: "Nossa IA analisou os balanços e fluxos de caixa e identificou oportunidades de investimento de longo prazo, com foco em valor intrínseco e governança.",
+                        link: "#"
+                    };
+                    const feedAtualizado = [novaNoticia, ...noticiasSimuladas];
+                    exibirCards(feedAtualizado);
+                }, 1000);
+            } else {
+                exibirCards(noticiasSimuladas);
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             renderizarFeed();
         });
 
-        // EXEMPLO DE INTEGRAÇÃO REAL (Se tivéssemos um backend/proxy e uma chave de API)
-        /*
-        async function buscarNoticiasReais() {
-            const API_KEY = 'SUA_CHAVE_AQUI'; // Chave da NewsAPI ou MarketStack
-            const URL = `https://api.example.com/v2/top-headlines?q=investimentos&apiKey=${API_KEY}`;
+        // LÓGICA DO TOGGLE DE TEMA (Repetida em todos os arquivos)
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             
-            try {
-                const response = await fetch(URL);
-                const data = await response.json();
-                
-                // Aqui entraria a LÓGICA DA IA para reescrever/filtrar
-                const noticiasFiltradas = data.articles.map(article => ({
-                    titulo: article.title,
-                    resumo: 'Análise da IA: ' + article.description.substring(0, 100) + '...', // Simulação de resumo da IA
-                    link: article.url
-                }));
-                
-                exibirCards(noticiasFiltradas);
-
-            } catch (error) {
-                console.error("Erro ao buscar notícias da API:", error);
-                exibirCards([{ titulo: "Erro de Conexão", resumo: "Não foi possível carregar as notícias dinâmicas.", link: "#" }]);
-            }
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const icon = document.getElementById('theme-toggle').querySelector('i');
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         }
-        // document.addEventListener('DOMContentLoaded', buscarNoticiasReais);
-        */
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+                const icon = document.getElementById('theme-toggle').querySelector('i');
+                icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+            }
+            renderizarFeed(); // Certifique-se de chamar a função de renderização
+        });
     </script>
 </body>
 </html>

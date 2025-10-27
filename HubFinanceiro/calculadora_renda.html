@@ -12,7 +12,7 @@
             max-width: 600px;
             margin: 40px auto;
             padding: 30px;
-            background-color: var(--cor-secundaria);
+            background-color: var(--cor-suave);
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
@@ -20,62 +20,67 @@
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
-            color: var(--cor-primaria);
+            color: var(--cor-texto);
         }
         .form-group input {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
-            border: 1px solid var(--cor-primaria);
+            border: 1px solid var(--cor-suave);
             border-radius: 5px;
             box-sizing: border-box;
+            background-color: var(--fundo-principal);
+            color: var(--cor-texto);
         }
         .resultado {
             margin-top: 30px;
             padding: 20px;
             border-top: 2px solid var(--cor-acao);
-            background-color: #E6EAE4;
+            background-color: var(--cor-suave);
             border-radius: 5px;
             text-align: center;
         }
         .resultado h3 {
-            color: var(--cor-primaria);
+            color: var(--cor-acao);
             margin-bottom: 10px;
             font-size: 1.8em;
         }
         .resultado p {
             font-size: 1.1em;
             margin-bottom: 8px;
+            color: var(--cor-texto);
         }
 
-        /* Estilo para a Seção Educacional (para caber 500+ palavras) */
+        /* Estilo para a Seção Educacional */
         .conteudo-educativo {
             margin-top: 50px;
             padding: 25px;
-            border: 1px solid var(--cor-primaria);
+            border: 1px solid var(--cor-suave);
             border-radius: 6px;
-            background-color: var(--fundo-principal); /* Fundo claro para leitura longa */
+            background-color: var(--fundo-principal);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             text-align: left;
+            color: var(--cor-texto);
         }
         .conteudo-educativo h3 {
             color: var(--cor-acao);
-            border-bottom: 2px solid var(--cor-primaria);
+            border-bottom: 2px solid var(--cor-suave);
             padding-bottom: 5px;
             margin-bottom: 15px;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Lora', serif;
         }
         .conteudo-educativo p {
             line-height: 1.7;
             margin-bottom: 15px;
         }
         .formula-box {
-            background-color: #f0f0f0;
+            background-color: var(--cor-suave);
             padding: 15px;
             border-left: 5px solid var(--cor-acao);
             font-family: monospace;
             overflow-x: auto;
             margin: 15px 0;
+            color: var(--cor-texto);
         }
         .fade-in {
             opacity: 0;
@@ -88,14 +93,18 @@
         }
     </style>
 </head>
-<body>
+<body data-theme="light">
     <div class="header-fixo">
         <span class="logo-invesjota">InvesJota</span>
         <nav class="nav-links">
-            <a href="home.html">Home</a>
+            <a href="index.html">Home</a>
             <a href="noticias.html">Notícias</a>
             <a href="catalogo_calculadoras.html">Calculadoras</a>
             <a href="juros_simples.html">Juros Simples</a>
+            
+            <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i> 
+            </button>
         </nav>
     </div>
 
@@ -121,7 +130,7 @@
             <button class="btn-acao" onclick="calcularRenda()">Calcular Capital Necessário</button>
 
             <div class="resultado" id="resultadoRenda" style="display: none;">
-                <h2>Capital Necessário</h2>
+                <h3>Capital Necessário</h3>
                 <p>Para sua Renda Anual de <span id="rendaAnualFormatada"></span> (R$ <span id="rendaMensalFormatada"></span>/mês), o capital requerido é:</p>
                 <h3 id="capitalNecessario"></h3>
             </div>
@@ -140,27 +149,27 @@
             <div class="formula-box">
                 Capital Necessário = (Renda Mensal Desejada * 12) / Taxa de Retirada Anual (em decimal)
             </div>
-            <p>Por exemplo, se você deseja R$ 5.000 por mês (R$ 60.000 por ano) e usa uma taxa de retirada de 4% (0,04), o capital necessário é R$ 60.000 / 0.04 = R$ 1.500.000.</p>
+            <p>Por exemplo, se você deseja R$ 5.000 por mês (R$ 60.000 por ano) e usa uma taxa de retirada de 4% (0,04), o capital necessário é R$ 60.000 / 0.04 = R$ 1.500.000. O gráfico acima ilustra de forma dramática como uma pequena mudança na TSR (de 3% para 6%) pode **reduzir drasticamente** o capital que você precisa acumular, mas também **aumenta o risco** de o dinheiro acabar cedo demais.</p>
 
-            <h3>A Regra dos 4%: O Padrão Ouro</h3>
+            <h3>A Regra dos 4%: O Padrão Ouro da Aposentadoria</h3>
             <p>A taxa de retirada de 4% é o ponto de partida mais famoso no planejamento de aposentadoria. Originada do **Estudo Trinity** (1998), essa regra sugere que, se você retirar 4% do seu portfólio no primeiro ano de aposentadoria e ajustar as retiradas seguintes pela inflação, seu dinheiro tem uma probabilidade muito alta (superior a 90%) de durar 30 anos.</p>
-            <p>Esta regra se tornou o padrão ouro porque ela equilibra a necessidade de ter uma renda sólida com a proteção do capital contra o risco de mercado. O gráfico acima ilustra de forma dramática como uma pequena mudança na TSR (de 3% para 6%) pode **reduzir drasticamente** o capital que você precisa acumular, mas também **aumenta o risco** de o dinheiro acabar cedo demais.</p>
+            <p>Esta regra se tornou o padrão ouro porque ela equilibra a necessidade de ter uma renda sólida com a proteção do capital contra o risco de mercado. É vital que seu patrimônio esteja investido em ativos que historicamente superam a inflação, garantindo que você esteja focado em **retornos reais** (acima da inflação). O planejamento é uma arte de balanço entre a ambição e a prudência.</p>
 
             <h3>Os Dois Maiores Riscos: Inflação e Risco de Sequência</h3>
             <p>Ao planejar viver de renda, dois fatores externos precisam ser considerados:</p>
             <ol>
-                <li><strong>Inflação:</strong> O aumento geral dos preços. Por isso, a TSR é geralmente aplicada ao **retorno real** (retorno do investimento menos a inflação). É vital que seu patrimônio esteja investido em ativos que historicamente superam a inflação.</li>
-                <li><strong>Risco de Sequência de Retornos (Sequence of Returns Risk - SORR):</strong> Este é o risco de ter grandes perdas no mercado nos **primeiros anos** após a aposentadoria. Um SORR negativo logo no início pode dizimar o capital mais rapidamente do que nos anos finais, comprometendo a sustentabilidade do patrimônio. Estratégias mais conservadoras no início da aposentadoria são frequentemente recomendadas para mitigar esse risco.</li>
+                <li><strong>Inflação:</strong> O aumento geral dos preços. O poder de compra do seu dinheiro diminui a cada ano. Seu portfólio deve ser robusto o suficiente para crescer mais rápido que a inflação (retornos reais) para que seu capital não seja corroído.</li>
+                <li><strong>Risco de Sequência de Retornos (SORR):</strong> Este é o risco de ter grandes perdas no mercado nos **primeiros anos** após a aposentadoria. Um SORR negativo logo no início pode dizimar o capital mais rapidamente do que nos anos finais, comprometendo a sustentabilidade do patrimônio. Estratégias mais conservadoras no início da aposentadoria são frequentemente recomendadas para mitigar esse risco.</li>
             </ol>
             <p>Para o investidor elegante do InvesJota, entender que o cálculo é uma estimativa é o primeiro passo para a prudência. A diferença entre 4% e 3% no capital necessário é de centenas de milhares de reais, mas a segurança que o 3% oferece em um cenário de crise pode ser a diferença entre o sucesso e o fracasso da sua aposentadoria.</p>
 
-            <h3>Como Usar a Calculadora para Projeção</h3>
+            <h3>Aplicações e Estratégias de Ajuste</h3>
             <p>Para obter um planejamento de longo prazo, você deve ser conservador:</p>
             <ul>
                 <li><strong>Renda Mensal:</strong> Use o valor líquido que você realmente precisa para cobrir todas as suas despesas atuais, ajustado pelo estilo de vida que você deseja na aposentadoria.</li>
-                <li><strong>Taxa de Retirada (TSR):</strong> Para um horizonte de 30 anos ou mais, use **3,5% a 4,0%** para maior segurança. Se seu horizonte for menor (ou se você tiver fontes de renda garantidas, como previdência social), você pode tentar 5%.</li>
+                <li><strong>Taxa de Retirada (TSR):</strong> Para um horizonte de 30 anos ou mais, use **3,5% a 4,0%** para maior segurança. Se seu horizonte for menor (ou se você tiver fontes de renda garantidas, como previdência social), você pode tentar 5%, mas saiba que o risco aumenta substancialmente.</li>
             </ul>
-            <p>Lembre-se: o valor final é apenas o ponto de partida. A gestão ativa do seu portfólio, a diversificação global e o ajuste anual da TSR com base no desempenho do mercado são os fatores que realmente garantem a longevidade da sua renda. O gráfico visualiza perfeitamente o preço da segurança: quanto menor a taxa de retirada, maior o capital necessário, mas maior a probabilidade de o seu dinheiro durar para sempre.</p>
+            <p>Lembre-se: o valor final é apenas o ponto de partida. A gestão ativa do seu portfólio, a diversificação global e o ajuste anual da TSR com base no desempenho do mercado são os fatores que realmente garantem a longevidade da sua renda. O gráfico visualiza perfeitamente o preço da segurança: quanto menor a taxa de retirada, maior o capital necessário, mas maior a probabilidade de o seu dinheiro durar para sempre. A liberdade financeira é alcançada com números, mas mantida com disciplina e gestão de risco.</p>
         </section>
         
     </main>
@@ -168,17 +177,17 @@
     <div class="bloco-ads">[Bloco AdSense Rodapé - Bloco Responsivo]</div>
 
     <footer>
-        <div class="footer-col"><h4 style="color: var(--cor-acao);">InvesJota</h4><p style="font-size: 0.9em;">Análise e precisão para o investidor clássico.</p></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">InvesJota</h4><p style="font-size: 0.9em;">Análise e precisão para o investidor.</p></div>
         <div class="footer-col"><h4 style="color: var(--cor-acao);">Recursos</h4><a href="catalogo_calculadoras.html">Todas as Calculadoras</a><a href="juros_compostos.html">Juros Compostos</a><a href="calculadora_renda.html">Viver de Renda</a></div>
         <div class="footer-col"><h4 style="color: var(--cor-acao);">Legal</h4><a href="#">Termos de Uso</a><a href="#">Política de Privacidade</a></div>
-        <div class="footer-col"><h4 style="color: var(--cor-acao);">Regra de Ouro</h4><p style="font-weight: bold; font-size: 1.1em;">"O tempo é o melhor amigo do dinheiro."</p></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Regra de Ouro</h4><p style="font-weight: bold; font-size: 1.1em; color: var(--cor-suave);">"O tempo é o melhor amigo do dinheiro."</p></div>
     </footer>
 
 
     <script>
         let graficoCapital;
-        const corPrimaria = '#4B6F44';
-        const corAcao = '#D4AF37';
+        const corPrimaria = '#191919'; 
+        const corAcao = '#B8860B'; 
 
         function calcularRenda() {
             const RM = parseFloat(document.getElementById('rendaMensal').value) || 0;
@@ -193,7 +202,6 @@
             const RendaAnual = RM * 12;
             const TR_decimal = TR_percentual / 100;
             
-            // Cálculo Principal
             const CapitalNecessario = RendaAnual / TR_decimal;
             
             const formatador = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -204,14 +212,12 @@
             
             // --- GERAÇÃO DO GRÁFICO (Impacto da Taxa) ---
             
-            // Simulação de Capital para diferentes taxas (2.5%, 3%, 4%, 5%, 6%)
             const taxas_simuladas = [2.5, 3, TR_percentual, 5, 6];
             const capitais_simulados = taxas_simuladas.map(taxa => {
                 if (taxa <= 0) return NaN;
                 return RendaAnual / (taxa / 100);
             });
             
-            // Identifica o ponto da taxa que o usuário inseriu
             const ponto_usuario = taxas_simuladas.indexOf(TR_percentual);
             const cores_pontos = capitais_simulados.map((c, index) => index === ponto_usuario ? corAcao : corPrimaria);
 
@@ -228,8 +234,8 @@
                             label: 'Capital Necessário (R$)',
                             data: capitais_simulados,
                             borderColor: corPrimaria,
-                            backgroundColor: 'rgba(75, 111, 68, 0.2)',
-                            pointBackgroundColor: cores_pontos, // Destaca o ponto atual
+                            backgroundColor: 'rgba(25, 25, 25, 0.2)',
+                            pointBackgroundColor: cores_pontos,
                             pointRadius: 6,
                             fill: true,
                             tension: 0.3
@@ -238,7 +244,9 @@
                 },
                 options: { 
                     responsive: true, 
-                    title: { display: true, text: 'Impacto da Taxa de Retirada no Capital Necessário' },
+                    plugins: {
+                        title: { display: true, text: 'Impacto da Taxa de Retirada no Capital Necessário' }
+                    },
                     scales: { 
                         y: { 
                             beginAtZero: false,
@@ -253,7 +261,7 @@
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    let label = context.dataset.label || '';
+                                    let label = 'Taxa: ' + context.label + ' | Capital: ';
                                     if (context.parsed.y !== null) {
                                         label += formatador.format(context.parsed.y);
                                     }
@@ -268,7 +276,7 @@
             document.getElementById('resultadoRenda').style.display = 'block';
         }
 
-        // Script para Scroll Animation
+        // Lógica de Scroll e Toggle
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -280,6 +288,27 @@
 
         document.querySelectorAll('.fade-in').forEach(element => {
             observer.observe(element);
+        });
+
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            const icon = document.getElementById('theme-toggle').querySelector('i');
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            try { if (document.getElementById('resultadoRenda').style.display === 'block') calcularRenda(); } catch (e) {}
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+                const icon = document.getElementById('theme-toggle').querySelector('i');
+                icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+            }
         });
     </script>
 </body>

@@ -5,19 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juros Simples | InvesJota</title>
     <link rel="stylesheet" href="assets/css/invesjota_base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .calculadora-form input {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid var(--cor-primaria);
+            border: 1px solid var(--cor-suave);
             border-radius: 4px;
+            background-color: var(--fundo-principal);
+            color: var(--cor-texto);
         }
         .resultado-container {
             margin-top: 40px;
             padding: 20px;
-            background-color: #E6EAE4;
+            background-color: var(--cor-suave);
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
@@ -27,36 +30,53 @@
         }
         .conteudo-educativo {
             margin-top: 50px;
-            padding: 20px;
-            border: 1px solid var(--cor-primaria);
+            padding: 25px;
+            border: 1px solid var(--cor-suave);
             border-radius: 6px;
-            background-color: var(--cor-secundaria);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: var(--fundo-principal);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            color: var(--cor-texto);
         }
         .conteudo-educativo h3 {
-            color: var(--cor-primaria);
-            border-bottom: 2px solid var(--cor-acao);
+            color: var(--cor-acao);
+            border-bottom: 2px solid var(--cor-suave);
             padding-bottom: 5px;
             margin-bottom: 15px;
+            font-family: 'Lora', serif;
         }
         .formula-box {
-            background-color: #f0f0f0;
+            background-color: var(--cor-suave);
+            color: var(--cor-texto);
             padding: 15px;
             border-left: 5px solid var(--cor-acao);
             font-family: monospace;
             overflow-x: auto;
-            margin-bottom: 15px;
+            margin: 15px 0;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body>
+<body data-theme="light">
     <div class="header-fixo">
         <span class="logo-invesjota">InvesJota</span>
         <nav class="nav-links">
-            <a href="home.html">Home</a>
+            <a href="index.html">Home</a>
             <a href="noticias.html">Notícias</a>
             <a href="catalogo_calculadoras.html">Calculadoras</a>
             <a href="juros_simples.html">Juros Simples</a>
+            
+            <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i> 
+            </button>
         </nav>
     </div>
 
@@ -64,7 +84,7 @@
 
     <main style="padding: 20px; max-width: 900px; margin: 0 auto;">
         <h1>Calculadora de Juros Simples</h1>
-        <p>Use esta ferramenta para calcular acréscimos lineares, como multas e juros lineares.</p>
+        <p style="color: var(--cor-texto);">Use esta ferramenta para calcular acréscimos lineares, como multas e juros lineares.</p>
 
         <div class="calculadora-form">
             <label for="principal">Capital Principal (R$):</label>
@@ -95,51 +115,46 @@
             <h3>1. Como Utilizar a Calculadora</h3>
             <p>Os Juros Simples são calculados de forma linear, ou seja, o juro incide sempre sobre o valor inicial. Preencha os campos:</p>
             <ol>
-                <li><strong>Capital Principal:</strong> O valor inicial (o empréstimo, a multa ou o investimento).</li>
-                <li><strong>Taxa de Juros (ao ano - %):</strong> A porcentagem de juros aplicada ao ano.</li>
+                <li><strong>Capital Principal:</strong> O valor inicial do empréstimo ou da dívida.</li>
+                <li><strong>Taxa de Juros (ao ano - %):</strong> A taxa percentual aplicada ao ano.</li>
                 <li><strong>Período (Anos):</strong> A duração total da operação.</li>
             </ol>
             <p>O gráfico mostrará o Montante Total (Principal + Juros) crescendo ano a ano de forma constante.</p>
 
             <h3>2. O Cálculo e Onde é Aplicado</h3>
-            <p>A fórmula do Juros Simples é a mais básica e demonstra um crescimento aritmético. O total de juros é determinado pela simples multiplicação do Principal pela Taxa pelo Tempo.</p>
+            <p>O Juros Simples é a fórmula mais básica, demonstrando um crescimento aritmético. O total de juros é determinado pela simples multiplicação do Principal pela Taxa pelo Tempo.</p>
             
             <p><strong>Fórmula:</strong></p>
             <div class="formula-box">
                 J = P * i * t<br>
                 M = P + J
             </div>
-            <p>Onde J é Juros, P é Principal, i é a Taxa (em decimal) e t é o Tempo (na mesma unidade da taxa).</p>
+            <p>Onde J é Juros, P é Principal, i é a Taxa (em decimal) e t é o Tempo (em anos).</p>
             
-            <p><strong>Aplicações:</strong> Juros Simples é usado principalmente em:</p>
-            <ul>
-                <li>Multas e atrasos de curto prazo.</li>
-                <li>Alguns empréstimos pessoais e financiamentos específicos que definem taxas fixas sobre o principal.</li>
-            </ul>
+            <p><strong>Aplicações:</strong> É usado principalmente em multas, atrasos e em algumas operações de curtíssimo prazo no mercado financeiro.</p>
 
             <h3>3. Juros Simples vs. Juros Compostos (A Diferença Crucial)</h3>
-            <p>Esta é a distinção mais importante para um investidor:</p>
+            <p>Esta é a distinção mais importante no mundo financeiro:</p>
             
-            <p><strong>Juros Simples (Crescimento Linear):</strong></p>
-            <ul>
-                <li>O juro é sempre calculado sobre o **Principal Inicial**.</li>
-                <li>Seu dinheiro cresce de forma constante, mas lenta.</li>
-            </ul>
-
-            <p><strong>Juros Compostos (Crescimento Exponencial):</strong></p>
-            <ul>
-                <li>O juro é calculado sobre o **Montante Atual** (Principal + Juros acumulados).</li>
-                <li>Seu dinheiro cresce de forma acelerada (juros sobre juros). É a base de todo o investimento de sucesso a longo prazo.</li>
-            </ul>
+            <p><strong>Juros Simples (Crescimento Linear):</strong> O juro é sempre calculado sobre o **Principal Inicial**. Seu dinheiro cresce de forma constante, mas lenta. É previsível, mas tem poder de acumulação baixo.</p>
+            
+            <p><strong>Juros Compostos (Crescimento Exponencial):</strong> O juro é calculado sobre o **Montante Atual** (Principal + Juros acumulados). Seu dinheiro cresce de forma acelerada (juros sobre juros). É a base de todo o investimento de longo prazo.</p>
         </section>
-        </main>
+    </main>
 
     <div class="bloco-ads">[Bloco AdSense Rodapé - Bloco Responsivo]</div>
 
+    <footer>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">InvesJota</h4><p style="font-size: 0.9em;">Análise e precisão para o investidor.</p></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Recursos</h4><a href="catalogo_calculadoras.html">Todas as Calculadoras</a><a href="juros_compostos.html">Juros Compostos</a><a href="calculadora_renda.html">Viver de Renda</a></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Legal</h4><a href="#">Termos de Uso</a><a href="#">Política de Privacidade</a></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Regra de Ouro</h4><p style="font-weight: bold; font-size: 1.1em; color: var(--cor-suave);">"O tempo é o melhor amigo do dinheiro."</p></div>
+    </footer>
+
     <script>
         let graficoJurosSimples;
-        const corPrimaria = '#4B6F44'; // Verde Escuro
-        const corAcao = '#D4AF37';     // Dourado
+        const corPrimaria = '#191919'; // Preto
+        const corAcao = '#B8860B';     // Ouro
 
         function calcularJurosSimples() {
             const P = parseFloat(document.getElementById('principal').value);
@@ -151,7 +166,6 @@
                  return;
             }
 
-            // 1. Cálculo Principal
             const Juros = P * T_anual * t;
             const Montante = P + Juros;
             
@@ -179,16 +193,18 @@
                         {
                             label: 'Montante Final (Juros Simples)',
                             data: montantes,
-                            borderColor: corPrimaria,
-                            backgroundColor: 'rgba(75, 111, 68, 0.2)',
+                            borderColor: corAcao,
+                            backgroundColor: 'rgba(184, 134, 11, 0.2)',
                             fill: true,
-                            tension: 0, // Crescimento linear = linha reta
+                            tension: 0,
                         }
                     ]
                 },
                 options: { 
                     responsive: true, 
-                    title: { display: true, text: 'Crescimento Linear do Montante' },
+                    plugins: {
+                        title: { display: true, text: 'Crescimento Linear do Montante' }
+                    },
                     scales: { 
                         y: { 
                             beginAtZero: true,
@@ -219,6 +235,36 @@
             
             document.getElementById('resultado-simples').style.display = 'block';
         }
+
+        // Lógica de Toggle (necessária para que o gráfico atualize as cores corretamente no Dark Mode)
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const icon = document.getElementById('theme-toggle').querySelector('i');
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+            // Tenta recalcular o gráfico após a mudança de tema para atualizar as cores
+            try {
+                if (document.getElementById('resultado-simples').style.display === 'block') {
+                    calcularJurosSimples();
+                }
+            } catch (e) {}
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+                const icon = document.getElementById('theme-toggle').querySelector('i');
+                icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+            }
+        });
     </script>
 </body>
 </html>
