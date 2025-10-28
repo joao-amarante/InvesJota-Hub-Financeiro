@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="assets/css/invesjota_base.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Estilos do Feed Dinâmico */
         .feed-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -24,6 +23,7 @@
             flex-direction: column;
             justify-content: space-between;
             min-height: 250px;
+            color: var(--cor-texto);
         }
         .noticia-card:hover {
             transform: translateY(-5px);
@@ -44,7 +44,6 @@
             align-self: flex-start;
             margin-top: 15px;
         }
-        /* Corrigir o estilo de carregamento para usar as cores do tema */
         #feed-noticias p {
             color: var(--cor-texto);
         }
@@ -58,7 +57,9 @@
             <a href="noticias.html">Notícias</a>
             <a href="catalogo_calculadoras.html">Calculadoras</a>
             <a href="juros_simples.html">Juros Simples</a>
-            
+            <a href="blog.html">Blog</a> 
+            <a href="risco.html">Perfil de Risco</a>
+
             <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()">
                 <i class="fas fa-moon"></i> 
             </button>
@@ -71,7 +72,7 @@
         <h1>Feed Dinâmico de Notícias Financeiras</h1>
         <p style="color: var(--cor-texto);">Análise de mercado atualizada, gerada a partir de dados de fontes confiáveis.</p>
         
-        <div class="bloco-ads">[Bloco AdSense In-Content - Abaixo do Título]</div>
+        <div class="bloco-ads">[Bloco AdSense In-Content]</div>
 
         <section id="feed-noticias" class="feed-grid">
             <p>Carregando notícias...</p>
@@ -87,43 +88,29 @@
     <div class="bloco-ads">[Bloco AdSense Rodapé - 300x250/Bloco Responsivo]</div>
 
     <script>
-        // SIMULAÇÃO DA CHAMADA DE API E GERAÇÃO DE CONTEÚDO
+        // SIMULAÇÃO DA CHAMADA DE API (INCLUINDO ID E CONTEÚDO COMPLETO)
         const noticiasSimuladas = [
-            { 
-                titulo: "A Taxa Selic e o Novo Ciclo de Quedas: Impacto na Renda Fixa", 
-                resumo: "Ajustes recentes na política monetária indicam uma transição no cenário de investimentos. A renda fixa perde rentabilidade nominal, exigindo que o investidor clássico busque títulos prefixados ou IPCA+ para proteger o capital.", 
-                link: "#" 
-            },
-            { 
-                titulo: "Fundo Imobiliário em Destaque: O Setor Logístico e a E-Commerce", 
-                resumo: "O boom do comércio eletrônico continua impulsionando os galpões logísticos. Analisamos os FIIs que apresentaram o maior 'dividend yield' nos últimos 60 dias, um sinal de solidez para o seu portfólio.", 
-                link: "#" 
-            },
-            { 
-                titulo: "Petróleo e Geopolítica: A Volatilidade que Tira o Sono do Trader", 
-                resumo: "Conflitos internacionais e a política de produção da OPEP definem a oscilação do barril. Entenda como essa instabilidade pode ser usada a seu favor, focando em commodities e diversificação cambial.", 
-                link: "#" 
-            },
-            { 
-                titulo: "Tecnologia Disruptiva: O Futuro do Pagamento Digital no Mercado Global", 
-                resumo: "Grandes empresas de tecnologia continuam a transformar o setor financeiro. O crescimento de *fintechs* que facilitam microtransações aponta para uma revolução no crédito e na gestão de ativos digitais.", 
-                link: "#" 
-            },
+            { id: 1, titulo: "A Taxa Selic e o Novo Ciclo de Quedas: Impacto na Renda Fixa", resumo: "Ajustes recentes na política monetária indicam uma transição no cenário de investimentos...", data: "27 Out, 2025", tags: "Renda Fixa, Selic", conteudoCompleto: "<p>O Comitê de Política Monetária (COPOM) sinalizou uma continuidade no ciclo de cortes da taxa básica de juros, a Selic. Para o investidor acostumado com a alta rentabilidade da renda fixa pós-fixada (atrelada ao CDI), o cenário exige uma recalibragem estratégica.</p><p>Com a Selic em queda, títulos como Tesouro Selic e CDBs que pagam 100% do CDI perdem atratividade nominal. A busca por retornos reais (acima da inflação) torna-se crucial. Alternativas incluem títulos prefixados, que travam uma taxa de juros mais alta, ou títulos IPCA+, que garantem um retorno real indexado à inflação.</p><p>É essencial diversificar e não abandonar a renda fixa, mas sim ajustar a alocação para capturar as melhores oportunidades dentro do novo regime de juros.</p>", link: "https://www.infomoney.com.br/onde-investir/" },
+            { id: 2, titulo: "Fundo Imobiliário em Destaque: O Setor Logístico e a E-Commerce", resumo: "O boom do comércio eletrônico continua impulsionando os galpões logísticos...", data: "26 Out, 2025", tags: "FIIs, Imóveis", conteudoCompleto: "<p>O crescimento exponencial do e-commerce transformou o setor de galpões logísticos em um dos pilares mais resilientes do mercado de Fundos de Investimento Imobiliário (FIIs).</p><p>Analisamos os principais FIIs de logística listados na B3, focando em métricas como taxa de vacância, qualidade dos inquilinos e, principalmente, o Dividend Yield (DY). Fundos com DY consistentemente acima da média do IFIX e contratos de aluguel longos (atípicos) oferecem uma combinação interessante de renda passiva e segurança para o portfólio.</p><p>A tese de investimento se baseia na demanda crescente por espaços bem localizados para distribuição rápida, um fator que deve continuar impulsionando os aluguéis e a valorização das cotas.</p>", link: "https://fiis.com.br/noticias/" },
+             { id: 3, titulo: "Petróleo e Geopolítica: A Volatilidade que Tira o Sono do Trader", resumo: "Conflitos internacionais e a política de produção da OPEP definem a oscilação do barril...", data: "25 Out, 2025", tags: "Commodities, Risco", conteudoCompleto: "<p>O preço do barril de petróleo (Brent e WTI) continua sendo um dos indicadores mais sensíveis às tensões geopolíticas globais. Desde conflitos no Oriente Médio até decisões estratégicas da OPEP+, a volatilidade é a norma.</p><p>Para o trader, essa volatilidade pode ser uma fonte de oportunidades, mas exige uma gestão de risco rigorosa. Estratégias como operar contratos futuros, opções ou ETFs de petróleo permitem exposição direcionada, mas a análise técnica e fundamentalista deve andar de mãos dadas.</p><p>Para o investidor de longo prazo, a diversificação em commodities, incluindo energia, pode servir como um hedge (proteção) contra a inflação e a desvalorização cambial, mas a alocação deve ser moderada devido ao risco inerente.</p>", link: "https://valor.globo.com/financas/" },
+             { id: 4, titulo: "Tecnologia Disruptiva: O Futuro do Pagamento Digital no Mercado Global", resumo: "Grandes empresas de tecnologia continuam a transformar o setor financeiro...", data: "24 Out, 2025", tags: "Fintech, Inovação", conteudoCompleto: "<p>A revolução das fintechs está longe de acabar. A integração de pagamentos instantâneos (como o PIX no Brasil), carteiras digitais e plataformas de 'Buy Now, Pay Later' (BNPL) está redefinindo a relação do consumidor com o dinheiro.</p><p>Grandes players de tecnologia (Big Techs) entram agressivamente nesse mercado, desafiando os bancos tradicionais com soluções mais ágeis e de menor custo. A tokenização de ativos e o avanço das moedas digitais de bancos centrais (CBDCs) são as próximas fronteiras.</p><p>Investir em empresas que lideram essa disrupção pode gerar retornos significativos, mas a seleção exige análise cuidadosa da regulação e da capacidade de escala de cada modelo de negócio.</p>", link: "https://exame.com/tecnologia/" },
         ];
 
         function exibirCards(noticiasArray) {
              const feedContainer = document.getElementById('feed-noticias');
-             feedContainer.innerHTML = ''; // Limpa antes de exibir
+             feedContainer.innerHTML = ''; 
 
              noticiasArray.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'noticia-card';
+                card.className = 'noticia-card fade-in';
                 card.innerHTML = `
                     <div style="flex-grow: 1;">
                         <h3>${item.titulo}</h3>
                         <p>${item.resumo}</p>
                     </div>
-                    <a href="${item.link}" class="btn-acao" style="display: inline-block; align-self: flex-end;">Detalhes</a>
+                    <a href="artigo.html?id=${item.id}" class="btn-acao" style="display: inline-block; align-self: flex-end;">
+                        Ler Detalhes
+                    </a> 
                 `;
                 feedContainer.appendChild(card);
             });
@@ -137,9 +124,10 @@
                 feedContainer.innerHTML = '<p style="text-align: center; color: var(--cor-texto);">Buscando novas análises (Simulação)...</p>';
                 setTimeout(() => {
                     const novaNoticia = {
+                        id: 100, // ID novo
                         titulo: "Análise Exclusiva: As 3 Ações Mais Sólidas para o Próximo Trimestre",
                         resumo: "Nossa IA analisou os balanços e fluxos de caixa e identificou oportunidades de investimento de longo prazo, com foco em valor intrínseco e governança.",
-                        link: "#"
+                        data: "28 Out, 2025", tags: "Ações, Análise", conteudoCompleto: "<p>Conteúdo completo do novo artigo...</p>", link: "#"
                     };
                     const feedAtualizado = [novaNoticia, ...noticiasSimuladas];
                     exibirCards(feedAtualizado);
@@ -149,19 +137,13 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            renderizarFeed();
-        });
-
-        // LÓGICA DO TOGGLE DE TEMA (Repetida em todos os arquivos)
+        // LÓGICA DO TOGGLE DE TEMA (Repetida)
         function toggleTheme() {
             const body = document.body;
             const currentTheme = body.getAttribute('data-theme');
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
             body.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
-            
             const icon = document.getElementById('theme-toggle').querySelector('i');
             icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         }
@@ -175,7 +157,24 @@
             } else {
                 document.body.setAttribute('data-theme', 'light');
             }
-            renderizarFeed(); // Certifique-se de chamar a função de renderização
+            renderizarFeed(); 
+
+            // Scroll Animation (Deve ser inicializado após renderizar os cards)
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, { threshold: 0.1 }); 
+
+            // Seleciona os cards após serem criados
+            setTimeout(() => { // Pequeno delay para garantir que os cards existam
+                 document.querySelectorAll('.noticia-card').forEach(element => {
+                    observer.observe(element);
+                });
+            }, 500); 
         });
     </script>
 </body>

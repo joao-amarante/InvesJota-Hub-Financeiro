@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog e Artigos | InvesJota</title>
+    <link rel="stylesheet" href="assets/css/invesjota_base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .blog-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .artigo-card {
+            background-color: var(--fundo-principal); 
+            border: 1px solid var(--cor-suave);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            color: var(--cor-texto); 
+        }
+        .artigo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--cor-acao);
+        }
+        .artigo-card h2 {
+            font-size: 1.5em;
+            color: var(--cor-contraste);
+            margin-top: 0;
+            border-bottom: 2px solid var(--cor-suave);
+            padding-bottom: 10px;
+        }
+        .artigo-card .resumo {
+            color: var(--cor-texto);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .metadata {
+            font-size: 0.85em;
+            color: var(--cor-secundaria-decor, #666);
+            margin-bottom: 10px; /* Adicionado espaço abaixo dos metadados */
+        }
+        .btn-ler-mais {
+            display: inline-block;
+            background-color: var(--cor-acao);
+            color: var(--texto-claro);
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background-color 0.3s, color 0.3s; /* Adicionado transição */
+        }
+        .btn-ler-mais:hover {
+             background-color: var(--cor-suave); /* Efeito hover do botão */
+             color: var(--cor-contraste);
+             border: 1px solid var(--cor-acao);
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div class="header-fixo">
+        <span class="logo-invesjota">InvesJota</span>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="noticias.html">Notícias</a>
+            <a href="catalogo_calculadoras.html">Calculadoras</a>
+            <a href="juros_simples.html">Juros Simples</a>
+            <a href="blog.html">Blog</a> 
+            <a href="risco.html">Perfil de Risco</a>
+
+            <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i> 
+            </button>
+        </nav>
+    </div>
+
+    <div class="bloco-ads" style="margin-top: 65px;">[Bloco AdSense Topo/Banner - 728x90]</div>
+
+    <main class="blog-container">
+        <h1>Blog: Insights e Estratégias de Capital</h1>
+        <p style="color: var(--cor-texto);">Conteúdo aprofundado para guiar suas decisões e construir sua inteligência financeira.</p>
+
+        <div class="bloco-ads">[Bloco AdSense In-Content]</div>
+
+        <section id="feed-blog">
+            <p style="color: var(--cor-texto);">Carregando artigos...</p>
+        </section>
+        
+    </main>
+
+    <div class="bloco-ads">[Bloco AdSense Rodapé - Bloco Responsivo]</div>
+
+    <footer>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">InvesJota</h4><p style="font-size: 0.9em;">Análise e precisão para o investidor.</p></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Recursos</h4><a href="catalogo_calculadoras.html">Todas as Calculadoras</a><a href="juros_compostos.html">Juros Compostos</a><a href="calculadora_renda.html">Viver de Renda</a></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Legal</h4><a href="#">Termos de Uso</a><a href="#">Política de Privacidade</a></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Regra de Ouro</h4><p style="font-weight: bold; font-size: 1.1em; color: var(--cor-suave);">"O tempo é o melhor amigo do dinheiro."</p></div>
+    </footer>
+
+    <script>
+        // LISTA DE ARTIGOS COMPLEXOS (SIMULADOS)
+        const artigos = [
+            { 
+                id: 11, // Usar IDs diferentes das notícias
+                titulo: "Alocação de Ativos: A Pirâmide de Risco e a Construção de Portfólio", 
+                resumo: "Entenda como a diversificação estratégica entre Renda Fixa, Renda Variável, Multimercado e Ativos Internacionais é a chave para um crescimento sólido com risco controlado...", 
+                data: "27 Out, 2025", tags: "Estratégia, Alocação", 
+                conteudoCompleto: `
+                    <h2>A Arquitetura da Riqueza: Montando sua Pirâmide de Risco</h2>
+                    <p>A alocação de ativos é, de longe, o fator mais determinante para o sucesso de longo prazo de um portfólio de investimentos, superando até mesmo a seleção individual de ações ou fundos. A ideia central é diversificar o capital entre diferentes classes de ativos que possuem correlações baixas ou negativas entre si. Isso significa que, quando uma classe de ativo está em baixa, outra pode estar em alta, suavizando a volatilidade geral da carteira.</p>
+                    <p>Pense na sua carteira como uma pirâmide:</p>
+                    <ul>
+                        <li><strong>Base (Segurança):</strong> Renda Fixa pós-fixada (Tesouro Selic, CDBs 100% CDI) e Fundos DI. É a sua reserva de emergência e a parte mais segura, com liquidez imediata.</li>
+                        <li><strong>Meio (Crescimento com Risco Moderado):</strong> Renda Fixa IPCA+ (proteção contra inflação), Fundos Multimercado com estratégias macro ou long biased, e Fundos Imobiliários (FIIs) de tijolo bem localizados.</li>
+                        <li><strong>Topo (Potencial de Alto Crescimento):</strong> Renda Variável (Ações de empresas sólidas - 'blue chips' e 'small caps' com potencial), BDRs ou ETFs de Ações Internacionais (exposição a mercados globais) e, para perfis agressivos, uma pequena alocação em Criptoativos.</li>
+                    </ul>
+                    <p>A proporção de cada camada depende do seu perfil de risco (calculado em nossa ferramenta!), do seu horizonte de tempo e dos seus objetivos. Um jovem com 30 anos para a aposentadoria pode ter 60-70% no topo e meio da pirâmide, enquanto alguém próximo da aposentadoria terá a maior parte na base.</p>
+                    <p><strong>O Rebalanceamento Periódico:</strong> A disciplina de rebalancear (vender o que subiu muito, comprar o que caiu) a cada 6 ou 12 meses é crucial para manter a alocação original e garantir que você compre na baixa e venda na alta, maximizando os retornos compostos.</p>`, 
+                link: "https://www.sunoresearch.com.br/artigos/alocacao-de-ativos/" 
+            },
+             { 
+                id: 12, 
+                titulo: "Behavioral Finance: Como Suas Emoções Sabotam Seus Investimentos", 
+                resumo: "Medo, ganância, excesso de confiança... Descubra os vieses cognitivos que levam investidores a tomar decisões irracionais e como superá-los com disciplina e estratégia...", 
+                data: "20 Out, 2025", tags: "Psicologia, Comportamento", 
+                conteudoCompleto: `
+                    <h2>O Inimigo Interno: Dominando a Psicologia do Investidor</h2>
+                    <p>O campo das Finanças Comportamentais (Behavioral Finance) estuda como fatores psicológicos influenciam as decisões financeiras, muitas vezes levando a resultados abaixo do esperado. Mesmo investidores experientes são suscetíveis a vieses que sabotam a lógica.</p>
+                    <p>Principais Vieses a Reconhecer:</p>
+                    <ul>
+                        <li><strong>Aversão à Perda:</strong> A dor de perder R$ 100 é psicologicamente mais forte do que o prazer de ganhar R$ 100. Isso leva a vender ativos bons muito cedo (para 'garantir o lucro') e segurar ativos ruins por tempo demais (esperando 'recuperar').</li>
+                        <li><strong>Excesso de Confiança:</strong> Acreditar que se sabe mais do que realmente sabe, levando a negociações excessivas (giro de carteira) e concentração em poucos ativos.</li>
+                        <li><strong>Efeito Manada (Herd Behavior):</strong> Seguir a multidão, comprando na euforia (topo do mercado) e vendendo no pânico (fundo do mercado).</li>
+                        <li><strong>Viés de Confirmação:</strong> Buscar apenas informações que confirmem suas crenças pré-existentes sobre um investimento, ignorando dados contrários.</li>
+                        <li><strong>Ancoragem:</strong> Fixar-se em um preço inicial (ex: o preço de compra de uma ação) e usá-lo como referência para decisões futuras, mesmo que o cenário fundamental tenha mudado.</li>
+                    </ul>
+                    <p><strong>Como Combater os Vieses?</strong> A chave é a **disciplina** e a **automatização**. Crie uma estratégia de alocação clara (veja nosso artigo sobre Pirâmide de Risco), defina regras de rebalanceamento e, se possível, automatize os aportes mensais. Ter um plano escrito e revisá-lo periodicamente ajuda a manter o foco nos objetivos de longo prazo, ignorando o ruído emocional do mercado diário. Lembre-se: o maior inimigo do investidor muitas vezes é ele mesmo.</p>`, 
+                link: "https://www.btgpactual.com/btg-insights/financas-comportamentais" 
+            },
+            { 
+                id: 13, 
+                titulo: "Fundos Imobiliários (FIIs) vs. Imóveis Físicos: Qual a Melhor Renda Passiva?", 
+                resumo: "Analisamos as vantagens e desvantagens de investir em FIIs (liquidez, diversificação, isenção de IR) versus a compra direta de imóveis (controle, potencial de valorização)...", 
+                data: "10 Out, 2025", tags: "FIIs, Imóveis", 
+                conteudoCompleto: `
+                    <h2>Renda Passiva Imobiliária: FIIs ou Compra Direta?</h2>
+                    <p>O sonho de viver de aluguel é antigo, mas a forma de alcançá-lo evoluiu. Hoje, o investidor tem duas rotas principais: comprar imóveis físicos diretamente ou investir em Fundos de Investimento Imobiliário (FIIs) negociados na Bolsa.</p>
+                    <h3>Vantagens dos FIIs:</h3>
+                    <ul>
+                        <li><strong>Acessibilidade:</strong> Com R$ 100 ou menos, você já compra cotas de FIIs de grandes shoppings, lajes corporativas ou galpões logísticos.</li>
+                        <li><strong>Liquidez:</strong> Vender cotas na Bolsa é muito mais rápido e fácil do que vender um imóvel físico.</li>
+                        <li><strong>Diversificação:</strong> Com pouco capital, você pode investir em diversos tipos de imóveis e inquilinos, diluindo o risco de vacância ou inadimplência.</li>
+                        <li><strong>Rendimentos Isentos de IR:</strong> Os dividendos mensais pagos pelos FIIs (provenientes dos aluguéis) são isentos de Imposto de Renda para pessoas físicas (sob certas condições).</li>
+                        <li><strong>Gestão Profissional:</strong> Uma equipe especializada cuida da administração, manutenção e negociação dos imóveis.</li>
+                    </ul>
+                    <h3>Vantagens dos Imóveis Físicos:</h3>
+                    <ul>
+                        <li><strong>Controle Total:</strong> Você decide quem aluga, o valor do aluguel, quando reformar e quando vender.</li>
+                        <li><strong>Potencial de Alavancagem:</strong> É possível financiar a compra do imóvel, usando o 'dinheiro do banco' para potencializar o retorno sobre o capital próprio.</li>
+                        <li><strong>Uso Pessoal:</strong> O imóvel pode servir de moradia ou uso comercial próprio no futuro.</li>
+                        <li><strong>Valorização Tangível:</strong> Para muitos, a sensação de possuir um bem físico traz maior segurança psicológica.</li>
+                    </ul>
+                    <p><strong>Qual Escolher?</strong> Para a maioria dos investidores focados em renda passiva e diversificação, os **FIIs oferecem uma combinação superior** de acessibilidade, liquidez e benefícios fiscais. A compra direta de imóveis exige mais capital, conhecimento do mercado local e maior trabalho administrativo (burocracia, inquilinos, reformas). No entanto, para quem busca controle total ou tem acesso a financiamento vantajoso, o imóvel físico pode ser uma alternativa válida, especialmente em nichos específicos (ex: imóveis comerciais bem localizados).</p>`, 
+                link: "https://einvestidor.estadao.com.br/mercado/fiis-ou-imoveis-qual-o-melhor-investimento/" 
+            },
+            { 
+                id: 14, 
+                titulo: "A Reserva de Emergência: O Colchão de Segurança Essencial", 
+                resumo: "Quanto guardar? Onde investir? Por que ela é o PRIMEIRO passo antes de qualquer investimento arriscado? Um guia completo para construir sua tranquilidade financeira...", 
+                data: "01 Out, 2025", tags: "Planejamento, Segurança", 
+                conteudoCompleto: `
+                    <h2>O Alicerce Financeiro: Construindo Sua Reserva de Emergência</h2>
+                    <p>Antes mesmo de pensar em ações, FIIs ou criptomoedas, todo investidor precisa de um porto seguro: a Reserva de Emergência. Ela é o dinheiro guardado especificamente para cobrir imprevistos, como a perda do emprego, uma despesa médica inesperada ou um conserto urgente no carro.</p>
+                    <h3>Quanto Guardar?</h3>
+                    <p>A regra geral é ter o equivalente a **6 a 12 meses** do seu custo de vida mensal guardado. Por exemplo, se seus gastos essenciais (moradia, alimentação, transporte, saúde) somam R$ 4.000 por mês, sua reserva deve ser entre R$ 24.000 e R$ 48.000.</p>
+                    <ul>
+                        <li><strong>6 Meses:</strong> Para quem tem estabilidade (funcionário público, CLT em empresa sólida).</li>
+                        <li><strong>12 Meses (ou mais):</strong> Para autônomos, freelancers, profissionais liberais ou quem tem renda variável.</li>
+                    </ul>
+                    <h3>Onde Investir a Reserva?</h3>
+                    <p>A reserva de emergência precisa atender a três critérios cruciais:</p>
+                    <ol>
+                        <li><strong>Segurança Máxima:</strong> O risco de perder dinheiro deve ser praticamente zero.</li>
+                        <li><strong>Liquidez Imediata:</strong> Você precisa conseguir resgatar o dinheiro rapidamente (no mesmo dia ou D+1) quando o imprevisto ocorrer.</li>
+                        <li><strong>Rentabilidade (Mínima):</strong> Deve render pelo menos a inflação ou a taxa Selic, para não perder poder de compra.</li>
+                    </ol>
+                    <p>As melhores opções no Brasil atualmente são:</p>
+                    <ul>
+                        <li><strong>Tesouro Selic (LFT):</strong> Título público federal com liquidez diária e risco baixíssimo.</li>
+                        <li><strong>CDBs de Liquidez Diária:</strong> De bancos grandes e sólidos, que paguem pelo menos 100% do CDI.</li>
+                        <li><strong>Fundos DI Taxa Zero:</strong> Fundos que investem em títulos de renda fixa de baixo risco, sem taxa de administração.</li>
+                    </ul>
+                    <p><strong>Por que é o PRIMEIRO passo?</strong> Sem a reserva, qualquer imprevisto pode forçá-lo a vender seus investimentos de longo prazo (como ações) em um momento ruim (baixa do mercado), realizando prejuízos e destruindo sua estratégia. A reserva te dá tranquilidade para manter seus investimentos de risco pelo tempo necessário para que eles maturem. É o alicerce sobre o qual toda a sua estratégia de riqueza será construída.</p>`, 
+                link: "https://blog.nubank.com.br/reserva-de-emergencia-o-que-e/" 
+            },
+             { 
+                id: 15, 
+                titulo: "Diversificação Internacional: Por Que Expor Seu Patrimônio ao Dólar?", 
+                resumo: "Redução do 'Risco Brasil', acesso a mercados maiores e proteção cambial. Exploramos os benefícios e as formas mais simples de investir no exterior (ETFs, BDRs, Contas Globais)...", 
+                data: "25 Set, 2025", tags: "Internacional, Dólar", 
+                conteudoCompleto: `
+                    <h2>Expandindo Horizontes: A Necessidade da Diversificação Internacional</h2>
+                    <p>Concentrar 100% do seu patrimônio em ativos brasileiros, por mais promissor que o país pareça, significa estar totalmente exposto ao 'Risco Brasil'. Esse risco inclui instabilidade política, volatilidade cambial, crises econômicas locais e mudanças regulatórias que podem impactar severamente seus investimentos.</p>
+                    <h3>Benefícios da Exposição Global:</h3>
+                    <ul>
+                        <li><strong>Redução de Risco:</strong> Mercados internacionais (como o S&P 500 nos EUA) muitas vezes se movem de forma descorrelacionada com o Ibovespa. Quando o Brasil vai mal, o exterior pode ir bem, equilibrando sua carteira.</li>
+                        <li><strong>Acesso a Setores Inexistentes no Brasil:</strong> O mercado global oferece acesso a gigantes de tecnologia, biotecnologia, semicondutores e outros setores de ponta que têm pouca representatividade na B3.</li>
+                        <li><strong>Proteção Cambial (Hedge):</strong> Ter uma parte do patrimônio em moeda forte (Dólar, Euro) protege seu poder de compra contra a desvalorização do Real.</li>
+                        <li><strong>Maior Potencial de Crescimento:</strong> Acesso às maiores e mais inovadoras empresas do mundo.</li>
+                    </ul>
+                    <h3>Como Investir no Exterior de Forma Simples:</h3>
+                    <p>Hoje, investir fora do Brasil é muito mais acessível:</p>
+                    <ul>
+                        <li><strong>ETFs Internacionais na B3:</strong> Fundos de índice negociados na bolsa brasileira que replicam índices estrangeiros (Ex: IVVB11 para o S&P 500, WRLD11 para o índice global MSCI World). Fácil, em Reais, mas com taxas.</li>
+                        <li><strong>BDRs (Brazilian Depositary Receipts):</strong> Recibos de ações de empresas estrangeiras negociados na B3 (Ex: Apple, Google, Tesla). Permite comprar 'pedaços' de ações internacionais diretamente na sua corretora brasileira.</li>
+                        <li><strong>Contas Globais em Corretoras Internacionais:</strong> Abrir conta em corretoras como Avenue, Nomad ou Interactive Brokers permite investir diretamente em ações, ETFs e REITs nos EUA e outros mercados, com maior variedade e menores custos (mas exige lidar com câmbio e Imposto de Renda no exterior).</li>
+                        <li><strong>Fundos de Investimento com Exposição Internacional:</strong> Muitos fundos multimercado ou de ações brasileiros já incluem uma parcela de ativos internacionais em suas carteiras.</li>
+                    </ul>
+                    <p><strong>Qual a Proporção Ideal?</strong> Especialistas recomendam que investidores brasileiros tenham entre **10% a 30%** do seu portfólio total alocado em ativos internacionais, dependendo do perfil de risco. Começar com ETFs na B3 é o caminho mais simples para dar o primeiro passo na diversificação global e proteger seu patrimônio das incertezas locais.</p>`, 
+                link: "https://www.infomoney.com.br/guias/investir-no-exterior/" 
+            },
+        ];
+
+        function exibirCardsBlog(artigosArray) {
+            const feedContainer = document.getElementById('feed-blog');
+            feedContainer.innerHTML = '';
+            
+            artigosArray.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'artigo-card fade-in';
+                card.innerHTML = `
+                    <div class="metadata">Publicado em ${item.data} | Categoria: ${item.tags}</div>
+                    <h2>${item.titulo}</h2>
+                    <p class="resumo">${item.resumo}</p>
+                    <a href="artigo.html?id=${item.id}" class="btn-acao">Ler Artigo Completo</a> 
+                `;
+                feedContainer.appendChild(card);
+            });
+        }
+
+        function renderizarBlog() {
+             exibirCardsBlog(artigos);
+             // Inicializa Scroll Animation para os cards do blog
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, { threshold: 0.1 }); 
+
+            document.querySelectorAll('.artigo-card').forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // LÓGICA DO TEMA
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            const icon = document.getElementById('theme-toggle').querySelector('i');
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+                const icon = document.getElementById('theme-toggle').querySelector('i');
+                icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+            }
+            renderizarBlog(); 
+        });
+    </script>
+</body>
+</html>

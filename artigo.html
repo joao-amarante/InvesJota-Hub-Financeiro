@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artigo | InvesJota</title>
+    <link rel="stylesheet" href="assets/css/invesjota_base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .artigo-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: var(--fundo-principal);
+            border: 1px solid var(--cor-suave);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            color: var(--cor-texto);
+        }
+        .artigo-container h1 {
+            font-size: 2.5em;
+            color: var(--cor-contraste);
+            border-bottom: 2px solid var(--cor-acao);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .metadata-artigo {
+            font-size: 0.9em;
+            color: var(--cor-secundaria-decor, #555);
+            margin-bottom: 25px;
+        }
+        .conteudo-artigo p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+         .conteudo-artigo h2 { /* Estilo para subtítulos dentro do artigo */
+             font-size: 1.8em;
+             margin-top: 30px;
+             margin-bottom: 15px;
+             color: var(--cor-acao);
+         }
+         .conteudo-artigo ul, .conteudo-artigo ol {
+             margin-left: 20px;
+             margin-bottom: 20px;
+         }
+         .conteudo-artigo li {
+             margin-bottom: 10px;
+         }
+        .fonte-original {
+            margin-top: 30px;
+            font-size: 0.9em;
+            font-style: italic;
+            color: var(--cor-texto);
+            border-top: 1px dashed var(--cor-suave);
+            padding-top: 15px;
+        }
+        .fonte-original a {
+            color: var(--cor-acao);
+            text-decoration: underline;
+        }
+         .formula-box {
+            background-color: var(--cor-suave);
+            padding: 15px;
+            border-left: 5px solid var(--cor-acao);
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+            color: var(--cor-texto);
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div class="header-fixo">
+        <span class="logo-invesjota">InvesJota</span>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="noticias.html">Notícias</a>
+            <a href="catalogo_calculadoras.html">Calculadoras</a>
+            <a href="juros_simples.html">Juros Simples</a>
+            <a href="blog.html">Blog</a>
+            <a href="risco.html">Perfil de Risco</a>
+            
+            <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i> 
+            </button>
+        </nav>
+    </div>
+
+    <div class="bloco-ads" style="margin-top: 65px;">[Bloco AdSense Topo/Banner - 728x90]</div>
+
+    <main class="artigo-container">
+        <h1 id="artigo-titulo">Carregando título...</h1>
+        <div id="artigo-metadata" class="metadata-artigo">Carregando data...</div>
+        
+        <div class="bloco-ads">[Bloco AdSense In-Content]</div>
+        
+        <article id="artigo-conteudo" class="conteudo-artigo">
+            <p>Carregando conteúdo completo...</p>
+        </article>
+
+        <div id="artigo-fonte" class="fonte-original" style="display: none;">
+            Fonte Original: <a id="artigo-link-fonte" href="#" target="_blank">Link</a>
+        </div>
+    </main>
+
+    <div class="bloco-ads">[Bloco AdSense Rodapé - Bloco Responsivo]</div>
+
+    <footer>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">InvesJota</h4><p style="font-size: 0.9em;">Análise e precisão para o investidor.</p></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Recursos</h4><a href="catalogo_calculadoras.html">Todas as Calculadoras</a><a href="juros_compostos.html">Juros Compostos</a><a href="calculadora_renda.html">Viver de Renda</a></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Legal</h4><a href="#">Termos de Uso</a><a href="#">Política de Privacidade</a></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Regra de Ouro</h4><p style="font-weight: bold; font-size: 1.1em; color: var(--cor-suave);">"O tempo é o melhor amigo do dinheiro."</p></div>
+    </footer>
+
+    <script>
+        // DADOS SIMULADOS (DEVEM SER OS MESMOS DO blog.html)
+         const artigos = [
+            { id: 11, titulo: "Alocação de Ativos: A Pirâmide de Risco e a Construção de Portfólio", resumo: "Entenda como a diversificação estratégica...", data: "27 Out, 2025", tags: "Estratégia, Alocação", 
+                conteudoCompleto: `<h2>A Arquitetura da Riqueza: Montando sua Pirâmide de Risco</h2><p>A alocação de ativos é, de longe, o fator mais determinante para o sucesso de longo prazo de um portfólio... A ideia central é diversificar o capital entre diferentes classes de ativos...</p><p>Pense na sua carteira como uma pirâmide:</p><ul><li><strong>Base (Segurança):</strong> Renda Fixa pós-fixada...</li><li><strong>Meio (Crescimento com Risco Moderado):</strong> Renda Fixa IPCA+...</li><li><strong>Topo (Potencial de Alto Crescimento):</strong> Renda Variável...</li></ul><p>A proporção de cada camada depende do seu perfil de risco...</p><p><strong>O Rebalanceamento Periódico:</strong> A disciplina de rebalancear... é crucial...</p>`, 
+                link: "https://www.sunoresearch.com.br/artigos/alocacao-de-ativos/" },
+             { id: 12, titulo: "Behavioral Finance: Como Suas Emoções Sabotam Seus Investimentos", resumo: "Medo, ganância, excesso de confiança...", data: "20 Out, 2025", tags: "Psicologia, Comportamento", 
+                conteudoCompleto: `<h2>O Inimigo Interno: Dominando a Psicologia do Investidor</h2><p>O campo das Finanças Comportamentais (Behavioral Finance) estuda como fatores psicológicos influenciam as decisões financeiras...</p><p>Principais Vieses a Reconhecer:</p><ul><li><strong>Aversão à Perda...</strong></li><li><strong>Excesso de Confiança...</strong></li><li><strong>Efeito Manada...</strong></li><li><strong>Viés de Confirmação...</strong></li><li><strong>Ancoragem...</strong></li></ul><p><strong>Como Combater os Vieses?</strong> A chave é a disciplina e a automatização...</p>`, 
+                link: "https://www.btgpactual.com/btg-insights/financas-comportamentais" },
+            { id: 13, titulo: "Fundos Imobiliários (FIIs) vs. Imóveis Físicos: Qual a Melhor Renda Passiva?", resumo: "Analisamos as vantagens e desvantagens...", data: "10 Out, 2025", tags: "FIIs, Imóveis", 
+                conteudoCompleto: `<h2>Renda Passiva Imobiliária: FIIs ou Compra Direta?</h2><p>O sonho de viver de aluguel é antigo... Hoje, o investidor tem duas rotas principais...</p><h3>Vantagens dos FIIs:</h3><ul><li>Acessibilidade...</li><li>Liquidez...</li><li>Diversificação...</li><li>Rendimentos Isentos de IR...</li><li>Gestão Profissional...</li></ul><h3>Vantagens dos Imóveis Físicos:</h3><ul><li>Controle Total...</li><li>Potencial de Alavancagem...</li><li>Uso Pessoal...</li><li>Valorização Tangível...</li></ul><p><strong>Qual Escolher?</strong> Para a maioria dos investidores focados em renda passiva e diversificação, os FIIs oferecem uma combinação superior...</p>`, 
+                link: "https://einvestidor.estadao.com.br/mercado/fiis-ou-imoveis-qual-o-melhor-investimento/" },
+            { id: 14, titulo: "A Reserva de Emergência: O Colchão de Segurança Essencial", resumo: "Quanto guardar? Onde investir? Por que ela é o PRIMEIRO passo...", data: "01 Out, 2025", tags: "Planejamento, Segurança", 
+                conteudoCompleto: `<h2>O Alicerce Financeiro: Construindo Sua Reserva de Emergência</h2><p>Antes mesmo de pensar em ações, FIIs ou criptomoedas, todo investidor precisa de um porto seguro: a Reserva de Emergência...</p><h3>Quanto Guardar?</h3><p>A regra geral é ter o equivalente a 6 a 12 meses do seu custo de vida mensal...</p><ul><li>6 Meses: Para quem tem estabilidade...</li><li>12 Meses (ou mais): Para autônomos...</li></ul><h3>Onde Investir a Reserva?</h3><p>A reserva de emergência precisa atender a três critérios cruciais: Segurança Máxima, Liquidez Imediata, Rentabilidade Mínima...</p><p>As melhores opções no Brasil atualmente são: Tesouro Selic, CDBs de Liquidez Diária, Fundos DI Taxa Zero...</p><p><strong>Por que é o PRIMEIRO passo?</strong> Sem a reserva, qualquer imprevisto pode forçá-lo a vender seus investimentos de longo prazo...</p>`, 
+                link: "https://blog.nubank.com.br/reserva-de-emergencia-o-que-e/" },
+             { id: 15, titulo: "Diversificação Internacional: Por Que Expor Seu Patrimônio ao Dólar?", resumo: "Redução do 'Risco Brasil', acesso a mercados maiores...", data: "25 Set, 2025", tags: "Internacional, Dólar", 
+                conteudoCompleto: `<h2>Expandindo Horizontes: A Necessidade da Diversificação Internacional</h2><p>Concentrar 100% do seu patrimônio em ativos brasileiros... significa estar totalmente exposto ao 'Risco Brasil'...</p><h3>Benefícios da Exposição Global:</h3><ul><li>Redução de Risco...</li><li>Acesso a Setores Inexistentes no Brasil...</li><li>Proteção Cambial (Hedge)...</li><li>Maior Potencial de Crescimento...</li></ul><h3>Como Investir no Exterior de Forma Simples:</h3><p>Hoje, investir fora do Brasil é muito mais acessível: ETFs Internacionais na B3, BDRs, Contas Globais, Fundos com Exposição Internacional...</p><p><strong>Qual a Proporção Ideal?</strong> Especialistas recomendam que investidores brasileiros tenham entre 10% a 30% do seu portfólio total alocado em ativos internacionais...</p>`, 
+                link: "https://www.infomoney.com.br/guias/investir-no-exterior/" },
+        ];
+
+        // --- LÓGICA PARA CARREGAR O ARTIGO (IDÊNTICA AO ANTERIOR) ---
+        function carregarArtigo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const artigoId = parseInt(urlParams.get('id'));
+            const artigo = artigos.find(a => a.id === artigoId);
+
+            if (artigo) {
+                document.title = `${artigo.titulo} | InvesJota`;
+                document.getElementById('artigo-titulo').textContent = artigo.titulo;
+                document.getElementById('artigo-metadata').textContent = `Publicado em ${artigo.data} | Categoria: ${artigo.tags}`;
+                document.getElementById('artigo-conteudo').innerHTML = artigo.conteudoCompleto; 
+
+                const fonteDiv = document.getElementById('artigo-fonte');
+                const linkFonte = document.getElementById('artigo-link-fonte');
+                linkFonte.href = artigo.link;
+                linkFonte.textContent = artigo.link;
+                fonteDiv.style.display = 'block';
+
+            } else {
+                document.getElementById('artigo-titulo').textContent = "Artigo Não Encontrado";
+                document.getElementById('artigo-conteudo').innerHTML = "<p>O artigo solicitado não foi encontrado ou ainda não foi escrito. Por favor, retorne à página do blog.</p>";
+            }
+        }
+
+        // --- LÓGICA DO TEMA (REPETIDA) ---
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            const icon = document.getElementById('theme-toggle').querySelector('i');
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+                const icon = document.getElementById('theme-toggle').querySelector('i');
+                icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+            }
+            carregarArtigo(); 
+        });
+    </script>
+</body>
+</html>

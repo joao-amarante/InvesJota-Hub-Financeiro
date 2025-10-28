@@ -41,7 +41,7 @@
         }
         .tabela-comparativa th {
             background-color: var(--cor-contraste);
-            color: white;
+            color: var(--texto-claro);
         }
         .grafico-area {
             margin-top: 40px;
@@ -85,6 +85,7 @@
             <a href="noticias.html">Notícias</a>
             <a href="catalogo_calculadoras.html">Calculadoras</a>
             <a href="juros_simples.html">Juros Simples</a>
+            <a href="blog.html">Blog</a>
             
             <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()">
                 <i class="fas fa-moon"></i> 
@@ -96,7 +97,7 @@
 
     <main style="padding: 20px; max-width: 1200px; margin: 0 auto;">
         <h1 style="text-align: center;">Comparador de Cartões de Crédito</h1>
-        <p style="text-align: center; color: var(--cor-texto);">Insira os dados de dois cartões para analisar qual oferece o melhor custo-benefício estimado.</p>
+        <p style="text-align: center; color: var(--cor-texto);">Insira os dados de dois cartões para analisar qual oferece o melhor custo-benefício estimado em termos de anuidade, risco de juros e recompensas.</p>
 
         <div class="bloco-ads">[Bloco AdSense In-Content]</div>
 
@@ -154,21 +155,17 @@
             <h2>A Arte de Escolher um Cartão: O Custo Oculto vs. Recompensa</h2>
             
             <h3>Como a Calculadora Ranqueia os Cartões</h3>
-            <p>A calculadora InvesJota utiliza uma métrica de custo-benefício simplificada, mas poderosa, para ranquear as opções. A fórmula balanceia o custo fixo (anuidade) e o risco de custo (juros do rotativo) contra a recompensa que você obtém (cashback/milhas). A lógica é: **Quanto menor a relação Custo/Benefício, melhor o cartão.**</p>
-            <p><strong>Cálculo Interno:</strong> O custo total considera a Anuidade mais uma penalidade pelos Juros Rotativos, pois a alta taxa de juros representa um risco significativo ao seu planejamento financeiro caso você precise usar o crédito rotativo. A fórmula é: $(Anuidade + (Juros\ Rotativo\ Anual \times Ponderação\ de\ Risco)) / Benefício\ (\%)$. O valor ponderado dos juros rotativos reflete a enorme penalidade que o mercado impõe sobre o crédito não pago integralmente. O gráfico de barras visualiza essa dualidade: você pode ter um cartão com alta anuidade, mas se o benefício for exponencialmente maior, o custo/benefício geral será favorável. Por outro lado, um cartão sem anuidade, mas com juros rotativos estratosféricos, é um risco que anula rapidamente qualquer pequeno cashback que ele ofereça. Lembre-se, a taxa rotativa é a taxa de juros mais cara do mercado, e o risco dela deve ser alto na sua avaliação.</p>
+            <p>A calculadora InvesJota utiliza uma métrica de custo-benefício simplificada, mas poderosa, para ranquear as opções. A fórmula balanceia o custo fixo (anuidade) e o risco de custo (juros do rotativo) contra a recompensa que você obtém (cashback/milhas). A lógica é: **Quanto menor a relação Custo/Benefício, melhor o cartão.** O valor ponderado dos juros rotativos reflete a enorme penalidade que o mercado impõe sobre o crédito não pago integralmente. O gráfico de barras visualiza essa dualidade: você pode ter um cartão com alta anuidade, mas se o benefício for exponencialmente maior, o custo/benefício geral será favorável. Por outro lado, um cartão sem anuidade, mas com juros rotativos estratosféricos, é um risco que anula rapidamente qualquer pequeno cashback que ele ofereça. Lembre-se, a taxa rotativa é a taxa de juros mais cara do mercado, e o risco dela deve ser alto na sua avaliação.</p>
             
             <h3>Onde os Bancos Escondem o Custo (Taxa Rotativa e Anuidade)</h3>
-            <p>A maior armadilha financeira em cartões não é a anuidade, mas sim a **Taxa de Juros Rotativo Anual**. Esta taxa é aplicada quando você não paga o valor total da fatura e é frequentemente superior a 300% ao ano, esmagando qualquer benefício que o cartão possa oferecer. O investidor elegante não se endivida, mas reconhece o risco: um cartão com juros baixos no rotativo é um 'seguro' melhor do que um cartão com juros altíssimos, mesmo que você nunca planeje usá-lo. Portanto, a taxa de juros é ponderada para refletir esse risco no nosso ranqueamento.</p>
-            <p>Muitas vezes, cartões 'Black' ou 'Infinite' têm anuidades altas (o custo fixo), mas o benefício em *milhas* ou *cashback* (a recompensa) supera esse custo, especialmente para quem tem um alto volume de gastos mensais. Para um usuário que gasta R$ 10.000/mês, 3% de cashback (R$ 300) rapidamente compensa uma anuidade de R$ 500,00. A chave é **nunca pagar juros**, mas sim usar o cartão como uma ferramenta de recompensas e um seguro para emergências. Nossa ferramenta ajuda você a quantificar esse valor líquido.</p>
+            <p>A maior armadilha financeira em cartões não é a anuidade, mas sim a **Taxa de Juros Rotativo Anual**. Esta taxa é aplicada quando você não paga o valor total da fatura e é frequentemente superior a 300% ao ano, esmagando qualquer benefício que o cartão possa oferecer. O investidor elegante não se endivida, mas reconhece o risco: um cartão com juros baixos no rotativo é um 'seguro' melhor do que um cartão com juros altíssimos, mesmo que você nunca planeje usá-lo. Portanto, a taxa de juros é ponderada para refletir esse risco no nosso ranqueamento. A chave é **nunca pagar juros**, mas sim usar o cartão como uma ferramenta de recompensas e um seguro para emergências. Nossa ferramenta ajuda você a quantificar esse valor líquido.</p>
+            <p>Muitas vezes, cartões 'Black' ou 'Infinite' têm anuidades altas (o custo fixo), mas o benefício em *milhas* ou *cashback* (a recompensa) supera esse custo, especialmente para quem tem um alto volume de gastos mensais. Para um usuário que gasta R$ 10.000/mês, 3% de cashback (R$ 300) rapidamente compensa uma anuidade de R$ 500,00.</p>
             
             <h3>A Avaliação da Recompensa (Milhas vs. Cashback)</h3>
-            <p>A seção de Benefício deve ser inserida como uma porcentagem da fatura mensal. Esta é a métrica mais justa para comparar milhas e cashback. O cashback é simples e direto: 1% de cashback significa 1% de volta em dinheiro. Milhas, por outro lado, precisam ser convertidas em um valor monetário (ex: "Quantos reais valem 1000 milhas no meu uso habitual?"). Para simplificar, o benefício de milhas deve ser estimado na calculadora com base no valor real que você consegue obter por elas, geralmente variando entre 0.8% e 1.5% do valor gasto, dependendo da cotação e do programa de fidelidade.</p>
-            <p><strong>Exemplo de uso:</strong> Se o Cartão A oferece R$ 120 de anuidade e 1% de cashback, e o Cartão B oferece R$ 480 de anuidade e 3% de cashback, o Cartão B é muito mais vantajoso se seus gastos forem altos, pois o retorno de 3% compensará o custo maior da anuidade rapidamente. Nossa ferramenta ajuda a quantificar essa intuição.</p>
-            
-            <h3>Como Usar a Calculadora para Decisões</h3>
+            <p>A seção de Benefício deve ser inserida como uma porcentagem da fatura mensal. Esta é a métrica mais justa para comparar milhas e cashback. O cashback é simples e direto: 1% de cashback significa 1% de volta em dinheiro. Milhas, por outro lado, precisam ser convertidas em um valor monetário. Para simplificar, o benefício de milhas deve ser estimado na calculadora com base no valor real que você consegue obter por elas, geralmente variando entre 0.8% e 1.5% do valor gasto, dependendo da cotação e do programa de fidelidade.</p>
             <p>Para obter o melhor resultado da ferramenta:</p>
             <ol>
-                <li>**Seja Honesto com o Juro:** Use a taxa de juros rotativo real do seu contrato.</li>
+                <li><strong>Seja Honesto com o Juro:</strong> Use a taxa de juros rotativo real do seu contrato.</li>
                 <li><strong>Estime o Benefício:</strong> Se for milhagem, descubra qual é o valor percentual real que você recupera. Não use o valor nominal.</li>
                 <li><strong>Foque no Rank:</strong> O Rank (1º ou 2º) deve guiar sua decisão. O cartão que oferece o Rank "Melhor" é aquele que, segundo nossa ponderação, oferece maior retorno por menor risco e custo.</li>
             </ol>
@@ -208,7 +205,6 @@
             };
 
             // 1. Lógica de Ranqueamento
-            // Fórmula: (Custo Total) / (Benefício). Quanto mais baixo, melhor.
             const custo_total1 = c1.anuidade + (c1.juros * 5); 
             const custo_total2 = c2.anuidade + (c2.juros * 5);
 
@@ -267,7 +263,7 @@
                         },
                         {
                             label: 'Benefício (Milhas/Cashback %)',
-                            data: [c1.beneficio * 10, c2.beneficio * 10], // Multiplicado por 10 para melhor visualização
+                            data: [c1.beneficio * 10, c2.beneficio * 10], 
                             backgroundColor: corAcao, 
                             borderColor: corAcao,
                             borderWidth: 1
@@ -288,7 +284,7 @@
             document.getElementById('resultado-comparacao').style.display = 'block';
         }
         
-        // Lógica de Toggle (para que a página tenha o Dark Mode)
+        // Lógica de Toggle
         function toggleTheme() {
             const body = document.body;
             const currentTheme = body.getAttribute('data-theme');
@@ -297,13 +293,7 @@
             localStorage.setItem('theme', newTheme);
             const icon = document.getElementById('theme-toggle').querySelector('i');
             icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-            
-            // Tenta recalcular o gráfico para atualizar as cores se ele já existir
-            try {
-                if (document.getElementById('resultado-comparacao').style.display === 'block') {
-                    compararCartoes(); 
-                }
-            } catch (e) {}
+            try { if (document.getElementById('resultado-comparacao').style.display === 'block') compararCartoes(); } catch (e) {}
         }
         document.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('theme');

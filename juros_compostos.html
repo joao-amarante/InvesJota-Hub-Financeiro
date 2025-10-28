@@ -12,7 +12,7 @@
             max-width: 600px;
             margin: 40px auto;
             padding: 30px;
-            background-color: var(--cor-secundaria);
+            background-color: var(--cor-suave);
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
@@ -20,61 +20,66 @@
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
-            color: var(--cor-primaria);
+            color: var(--cor-texto);
         }
         .form-group input {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
-            border: 1px solid var(--cor-primaria);
+            border: 1px solid var(--cor-suave);
             border-radius: 5px;
             box-sizing: border-box;
+            background-color: var(--fundo-principal);
+            color: var(--cor-texto);
         }
         .resultado {
             margin-top: 30px;
             padding: 20px;
             border-top: 2px solid var(--cor-acao);
-            background-color: #E6EAE4;
+            background-color: var(--cor-suave);
             border-radius: 5px;
             text-align: center;
         }
         .resultado h3 {
-            color: var(--cor-primaria);
+            color: var(--cor-acao);
             margin-bottom: 10px;
             font-size: 1.8em;
         }
         .resultado p {
             font-size: 1.1em;
             margin-bottom: 8px;
+            color: var(--cor-texto);
         }
         /* Estilo para a Seção Educacional */
         .conteudo-educativo {
             margin-top: 50px;
             padding: 25px;
-            border: 1px solid var(--cor-primaria);
+            border: 1px solid var(--cor-suave);
             border-radius: 6px;
             background-color: var(--fundo-principal);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             text-align: left;
+            color: var(--cor-texto);
         }
         .conteudo-educativo h3 {
             color: var(--cor-acao);
-            border-bottom: 2px solid var(--cor-primaria);
+            border-bottom: 2px solid var(--cor-suave);
             padding-bottom: 5px;
             margin-bottom: 15px;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Lora', serif;
         }
         .conteudo-educativo p {
             line-height: 1.7;
             margin-bottom: 15px;
         }
         .formula-box {
-            background-color: #f0f0f0;
+            background-color: var(--cor-suave);
             padding: 15px;
             border-left: 5px solid var(--cor-acao);
             font-family: monospace;
             overflow-x: auto;
             margin: 15px 0;
+            color: var(--cor-texto);
         }
         .fade-in {
             opacity: 0;
@@ -87,18 +92,23 @@
         }
     </style>
 </head>
-<body>
+<body data-theme="light">
     <div class="header-fixo">
         <span class="logo-invesjota">InvesJota</span>
         <nav class="nav-links">
-            <a href="home.html">Home</a>
+            <a href="index.html">Home</a>
             <a href="noticias.html">Notícias</a>
             <a href="catalogo_calculadoras.html">Calculadoras</a>
             <a href="juros_simples.html">Juros Simples</a>
+            <a href="blog.html">Blog</a>
+            
+            <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i> 
+            </button>
         </nav>
     </div>
 
-    <div class="bloco-ads" style="margin-top: 60px;">[Bloco AdSense Topo/Banner - 728x90]</div>
+    <div class="bloco-ads" style="margin-top: 65px;">[Bloco AdSense Topo/Banner - 728x90]</div>
 
     <main style="padding: 20px; max-width: 1000px; margin: 0 auto;">
         <h1 style="text-align: center;">Calculadora de Juros Compostos</h1>
@@ -142,11 +152,10 @@
             <h3>Como a Calculadora Projeta o Seu Futuro</h3>
             <p>Esta calculadora simula o crescimento do seu capital usando a regra mais poderosa do mercado: os juros compostos. Diferente dos juros simples, que crescem linearmente, os compostos adicionam os lucros de cada período ao valor principal, fazendo com que o montante cresça de forma exponencial. O gráfico gerado ilustra essa curva: o crescimento lento no início, mas que se acelera dramaticamente nos anos finais.</p>
             <p>O cálculo é feito mês a mês para incluir a complexidade dos aportes regulares. A taxa anual que você insere é dividida por 12 (taxa mensal) e o período é convertido para meses. A cada ciclo, os juros são calculados sobre o valor total acumulado até o momento, e só depois o seu novo aporte é adicionado.</p>
-            <p><strong>A Fórmula Mês a Mês:</strong> $M_{n} = M_{n-1} \times (1 + i) + Aporte$. Este é o segredo da projeção. Onde $M_{n}$ é o montante do mês atual, $M_{n-1}$ é o montante do mês anterior e $i$ é a taxa mensal.</p>
+            <p><strong>A Fórmula Mês a Mês:</strong> $M_{n} = M_{n-1} \times (1 + Taxa_{Mensal}) + Aporte$. Este é o segredo da projeção. Onde $M_{n}$ é o montante do mês atual, $M_{n-1}$ é o montante do mês anterior e $Taxa_{Mensal}$ é a taxa de juros aplicada.</p>
 
             <h3>O Fator Tempo: O Aliado Silencioso do Investidor</h3>
-            <p>Se você perguntar a qualquer investidor experiente qual é o fator mais importante para a riqueza, ele não dirá "taxa de juros alta", mas sim **"tempo"**. O tempo de maturação do capital é o que transforma pequenos aportes em grandes fortunas. No nosso gráfico, a diferença entre a linha do "Total Investido" (o dinheiro que saiu do seu bolso) e a linha do "Montante Final" (o dinheiro que o mercado gerou) é o seu lucro puro. Essa diferença é mínima nos primeiros cinco anos e explode após a marca de 15 anos, mostrando que o tempo começa a trabalhar para você de forma agressiva.</p>
-            <p>O maior erro que um novo investidor comete é subestimar o poder de **começar cedo**. Uma pessoa que investe R$ 500 por mês dos 20 aos 30 anos e depois para, geralmente, terá um patrimônio maior aos 60 anos do que alguém que começou a investir R$ 500 por mês apenas aos 35 anos e continuou até os 60. Isso acontece porque o capital inicial teve mais tempo para se beneficiar da fase exponencial dos juros.</p>
+            <p>Se você perguntar a qualquer investidor experiente qual é o fator mais importante para a riqueza, ele não dirá "taxa de juros alta", mas sim **"tempo"**. O tempo de maturação do capital é o que transforma pequenos aportes em grandes fortunas. O maior erro que um novo investidor comete é subestimar o poder de **começar cedo**. Uma pessoa que investe R$ 500 por mês dos 20 aos 30 anos e depois para, geralmente, terá um patrimônio maior aos 60 anos do que alguém que começou a investir R$ 500 por mês apenas aos 35 anos e continuou até os 60. Isso acontece porque o capital inicial teve mais tempo para se beneficiar da fase exponencial dos juros. A diferença entre a linha do "Total Investido" (o dinheiro que saiu do seu bolso) e a linha do "Montante Final" (o dinheiro que o mercado gerou) é o seu lucro puro. Essa diferença é mínima nos primeiros cinco anos e explode após a marca de 15 anos, mostrando que o tempo começa a trabalhar para você de forma agressiva.</p>
 
             <h3>Como Usar a Calculadora para Decisões (Aportes vs. Taxa)</h3>
             <p>A ferramenta serve para identificar suas alavancas de crescimento. Existem dois vetores principais:</p>
@@ -154,8 +163,7 @@
                 <li><strong>Aporte Mensal:</strong> A variável que você controla. Aumentar o aporte em R$ 100 hoje tem um efeito garantido e imediato.</li>
                 <li><strong>Taxa de Retorno:</strong> Controlada pela sua estratégia de alocação de ativos (risco). Buscar uma taxa mais alta exige mais risco (ex: maior porcentagem em Renda Variável).</li>
             </ol>
-            <p>Use a calculadora para responder a perguntas cruciais: *Se eu aumentar meu aporte em 10% por ano, quanto tempo eu economizo?* ou *Se eu focar em um investimento mais arriscado que me dê 2% a mais de retorno, qual será o impacto final?* A visualização do gráfico com duas linhas (o que você investiu vs. o que você ganhou) é a prova visual de que, no longo prazo, **seu dinheiro ganha mais dinheiro do que você**. Esse é o objetivo final de dominar os juros compostos.</p>
-            <p style="font-weight: bold; color: var(--cor-acao);"><i class="fas fa-chart-bar"></i> Conclusão InvesJota: O capital inicial e os aportes são a fundação (Juros Simples), mas o tempo e a taxa de retorno são a aceleração (Juros Compostos). Maximize o tempo e minimize o risco para uma rentabilidade sólida.</p>
+            <p>Use a calculadora para responder a perguntas cruciais: *Se eu aumentar meu aporte em 10% por ano, quanto tempo eu economizo?* ou *Se eu focar em um investimento mais arriscado que me dê 2% a mais de retorno, qual será o impacto final?* A visualização do gráfico com duas linhas (o que você investiu vs. o que você ganhou) é a prova visual de que, no longo prazo, **seu dinheiro ganha mais dinheiro do que você**. Esse é o objetivo final de dominar os juros compostos. O capital inicial e os aportes são a fundação (Juros Simples), mas o tempo e a taxa de retorno são a aceleração (Juros Compostos). Maximize o tempo e minimize o risco para uma rentabilidade sólida.</p>
         </section>
         
     </main>
@@ -163,17 +171,17 @@
     <div class="bloco-ads">[Bloco AdSense Rodapé - Bloco Responsivo]</div>
 
     <footer>
-        <div class="footer-col"><h4 style="color: var(--cor-acao);">InvesJota</h4><p style="font-size: 0.9em;">Análise e precisão para o investidor clássico.</p></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">InvesJota</h4><p style="font-size: 0.9em;">Análise e precisão para o investidor.</p></div>
         <div class="footer-col"><h4 style="color: var(--cor-acao);">Recursos</h4><a href="catalogo_calculadoras.html">Todas as Calculadoras</a><a href="juros_compostos.html">Juros Compostos</a><a href="calculadora_renda.html">Viver de Renda</a></div>
         <div class="footer-col"><h4 style="color: var(--cor-acao);">Legal</h4><a href="#">Termos de Uso</a><a href="#">Política de Privacidade</a></div>
-        <div class="footer-col"><h4 style="color: var(--cor-acao);">Regra de Ouro</h4><p style="font-weight: bold; font-size: 1.1em;">"O tempo é o melhor amigo do dinheiro."</p></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Regra de Ouro</h4><p style="font-weight: bold; font-size: 1.1em; color: var(--cor-suave);">"O tempo é o melhor amigo do dinheiro."</p></div>
     </footer>
 
 
     <script>
         let graficoCompostos;
-        const corPrimaria = '#4B6F44'; // Verde Escuro
-        const corAcao = '#D4AF37';     // Dourado
+        const corPrimaria = '#191919'; 
+        const corAcao = '#B8860B'; 
 
         function calcularCompostos() {
             const C = parseFloat(document.getElementById('capital').value) || 0;
@@ -193,15 +201,13 @@
             let total_investido = C;
             let dados_grafico_investido = [C];
             let dados_grafico_montante = [C];
-            let labels = [0]; // Mês 0
+            let labels = [0]; 
             
-            // Simulação mês a mês
             for (let m = 1; m <= meses_totais; m++) {
                 montante *= (1 + taxa_mensal);
                 montante += A;
                 total_investido += A;
 
-                // Registra dados anuais ou a cada 5 anos para não sobrecarregar o gráfico
                 if (m % 12 === 0 || m % 60 === 0) { 
                     dados_grafico_investido.push(total_investido);
                     dados_grafico_montante.push(montante);
@@ -209,15 +215,13 @@
                 }
             }
 
-            // Garante que o último ponto seja o final da projeção
             if (labels[labels.length - 1] !== meses_totais) {
                 dados_grafico_investido.push(total_investido);
                 dados_grafico_montante.push(montante);
                 labels.push(meses_totais);
             }
 
-
-            const jurosGanhos = montante - total_investido;
+            const jurosGanhos = montante - totalInvestido;
             const formatador = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
             
             // 1. Atualiza o resultado
@@ -238,7 +242,7 @@
                             label: 'Total Investido',
                             data: dados_grafico_investido,
                             borderColor: corPrimaria,
-                            backgroundColor: 'rgba(75, 111, 68, 0.2)',
+                            backgroundColor: 'rgba(25, 25, 25, 0.1)',
                             fill: false,
                             tension: 0.4
                         },
@@ -294,6 +298,28 @@
 
         document.querySelectorAll('.fade-in').forEach(element => {
             observer.observe(element);
+        });
+        
+        // Lógica de Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            const icon = document.getElementById('theme-toggle').querySelector('i');
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            try { if (document.getElementById('resultadoCompostos').style.display === 'block') calcularCompostos(); } catch (e) {}
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+                const icon = document.getElementById('theme-toggle').querySelector('i');
+                icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+            }
         });
     </script>
 </body>

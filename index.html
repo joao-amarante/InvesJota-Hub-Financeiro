@@ -6,105 +6,79 @@
     <title>InvesJota | Seu Hub de Ferramentas Financeiras</title>
     <link rel="stylesheet" href="assets/css/invesjota_base.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <style>
         /* Estilos específicos para o BANNER DE IMAGEM */
         .hero-video {
-            position: relative;
-            height: 400px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--texto-claro);
-            margin-top: 65px;
-            
-            /* CORREÇÃO FINAL: NOME EXATO DO ARQUIVO WEBP */
-            background-image: url('assets/imagens/banner_principal.jpg.webp'); 
-            background-size: cover; 
-            background-position: center center; 
-            background-repeat: no-repeat;
+            position: relative; height: 400px; overflow: hidden; display: flex;
+            align-items: center; justify-content: center; text-align: center;
+            color: var(--texto-claro); margin-top: 65px;
+            background-image: url('assets/imagens/banner_principal.jpg.webp');
+            background-size: cover; background-position: center center; background-repeat: no-repeat;
         }
-        
         .hero-content {
-            z-index: 1;
-            padding: 30px;
-            background-color: rgba(0, 0, 0, 0.65); 
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); 
+            z-index: 1; padding: 30px; background-color: rgba(0, 0, 0, 0.65);
+            border-radius: 8px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
         }
-        .hero-content h1 {
-            color: var(--cor-acao); 
-            font-size: 3.5em;
-            margin-bottom: 10px;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8); 
-        }
-        .hero-content p {
-            color: var(--texto-claro);
-            font-size: 1.2em;
-        }
+        .hero-content h1 { color: var(--cor-acao); font-size: 3.5em; margin-bottom: 10px; text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8); }
+        .hero-content p { color: var(--texto-claro); font-size: 1.2em; }
 
         /* TOGGLE SWITCH - Botão de Tema */
-        .theme-toggle-btn {
-            background: none;
-            border: none;
-            color: var(--cor-acao); 
-            font-size: 1.5em;
-            cursor: pointer;
-            margin-left: 30px;
-            transition: transform 0.3s;
-        }
-        .theme-toggle-btn:hover {
-            transform: scale(1.1);
-        }
+        .theme-toggle-btn { background: none; border: none; color: var(--cor-acao); font-size: 1.5em; cursor: pointer; margin-left: 30px; transition: transform 0.3s; }
+        .theme-toggle-btn:hover { transform: scale(1.1); }
 
-        /* Estilos da Mini-Calculadora (Para garantir contraste total) */
-        .mini-calculadora {
-            background-color: var(--fundo-principal); 
-            border: 1px solid var(--cor-suave);
-            padding: 25px;
-            border-radius: 4px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            text-align: left;
-            margin-top: 40px;
-            color: var(--cor-texto); 
+        /* WIDGET DE COTAÇÕES (CORRIGIDO) */
+        .market-data-widget {
+            display: flex; justify-content: space-around; align-items: center; /* Centraliza verticalmente */
+            padding: 20px; background-color: var(--cor-suave); color: var(--cor-texto);
+            border-radius: 4px; margin-bottom: 40px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        .mini-calculadora input {
-            border: 1px solid var(--cor-suave);
-            background-color: var(--fundo-principal);
-            color: var(--cor-texto);
-        }
-        .mini-resultado h3 {
-            color: var(--cor-acao); 
-        }
-        
+        .cotacao-item { text-align: center; font-family: 'Inter', sans-serif; }
+        .cotacao-item .label { font-weight: 600; display: block; margin-bottom: 5px; font-size: 0.9em; }
+        .cotacao-item .valor { font-size: 1.4em; color: var(--cor-acao); font-weight: bold; }
+        .cotacao-item .status { font-size: 0.9em; margin-left: 5px; font-weight: bold; }
+
+        /* Estilos da Mini-Calculadora */
+        .mini-calculadora { background-color: var(--fundo-principal); border: 1px solid var(--cor-suave); padding: 25px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); text-align: left; margin-top: 40px; color: var(--cor-texto); }
+        .mini-calculadora input { border: 1px solid var(--cor-suave); background-color: var(--fundo-principal); color: var(--cor-texto); width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 4px; box-sizing: border-box;}
+        .mini-resultado h3 { color: var(--cor-acao); }
+
         /* Layout de Prova Social */
-        .prova-social {
-            background-color: var(--cor-suave);
-            color: var(--cor-texto);
-            padding: 30px;
-            border-radius: 4px;
-            margin-top: 50px;
-            text-align: center;
-        }
-        .depoimento i {
-            color: var(--cor-acao); 
-        }
-        .prova-social p {
-            color: var(--cor-acao); 
-            font-weight: bold;
-        }
+        .prova-social { background-color: var(--cor-suave); color: var(--cor-texto); padding: 30px; border-radius: 4px; margin-top: 50px; text-align: center; }
+        .depoimento i { color: var(--cor-acao); }
+        .prova-social p.nome-cliente { color: var(--cor-acao); font-weight: bold; }
+        .prova-social p.depoimento-texto { color: var(--cor-texto); font-style: italic; }
 
-        /* Classes para Scroll Animation (mantido) */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(15px);
-            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        /* === CARROSSÉIS === */
+        .preview-section {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: var(--cor-suave);
+            border-radius: 8px;
+            color: var(--cor-texto);
         }
-        .visible {
-            opacity: 1;
-            transform: translateY(0);
+        .preview-section h2 { text-align: center; color: var(--cor-contraste); margin-bottom: 25px; }
+        /* Ajuste no card de preview */
+        .preview-card {
+             background-color: var(--fundo-principal); border: 1px solid var(--cor-suave); padding: 20px;
+             border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+             transition: transform 0.3s, box-shadow 0.3s;
+             width: 90%; min-height: 240px; display: flex; flex-direction: column;
+             justify-content: space-between; color: var(--cor-texto);
         }
+        .preview-card:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+        .preview-card h3 { font-size: 1.3em; color: var(--cor-acao); margin-top: 0; margin-bottom: 10px; line-height: 1.3; }
+        .preview-card p { font-size: 0.95em; line-height: 1.6; margin-bottom: 15px; color: var(--cor-texto); }
+        .preview-card a { color: var(--cor-acao); font-weight: bold; text-decoration: none; font-size: 0.9em; align-self: flex-start;}
+        .preview-card a:hover { text-decoration: underline; }
+
+        /* Swiper adjustments */
+        .swiper-container { padding-bottom: 50px; }
+        .swiper-slide { padding: 0 5px; height: auto !important; } /* Altura auto e padding */
+
+        /* Scroll Animation (mantido) */
+        .fade-in { opacity: 0; transform: translateY(15px); transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body data-theme="light">
@@ -115,9 +89,11 @@
             <a href="noticias.html">Notícias</a>
             <a href="catalogo_calculadoras.html">Calculadoras</a>
             <a href="juros_simples.html">Juros Simples</a>
-            
+            <a href="blog.html">Blog</a>
+            <a href="risco.html">Perfil de Risco</a>
+
             <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()">
-                <i class="fas fa-moon"></i> 
+                <i class="fas fa-moon"></i>
             </button>
         </nav>
     </div>
@@ -135,35 +111,45 @@
     <div class="bloco-ads">[Bloco AdSense Topo/Banner - 728x90]</div>
 
     <main style="padding: 20px; max-width: 1000px; margin: 0 auto;">
-        
+
+        <section class="market-data-widget fade-in">
+            <div class="cotacao-item">
+                <span class="label">Dólar PTAX</span>
+                <span id="cotacao-dolar" class="valor">--</span>
+                <span id="status-dolar" class="status">--</span>
+            </div>
+            <div class="cotacao-item">
+                <span class="label">Ibovespa</span>
+                <span id="cotacao-ibov" class="valor">--</span>
+                <span id="status-ibov" class="status">--</span>
+            </div>
+            <div class="cotacao-item">
+                <span class="label">SELIC (Meta)</span>
+                <span id="cotacao-selic" class="valor">--</span>
+                <span class="status">/Ano</span>
+            </div>
+        </section>
+
         <section style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px; align-items: start;">
-            
             <div class="fade-in" style="text-align: left;">
                 <h2 style="color: var(--cor-contraste);">Descubra o Poder dos Seus Números.</h2>
                 <p style="font-size: 1.1em; color: var(--cor-texto);">Navegue por um hub de ferramentas financeiras com design elegante. Otimize seus investimentos, compare custos e projete sua liberdade.</p>
                 <button class="btn-acao" onclick="location.href='catalogo_calculadoras.html'" style="margin-top: 15px;">
                     Ver Catálogo Completo
                 </button>
-
-                <div class="bloco-ads" style="margin-top: 30px;">[Bloco AdSense In-Content - Abaixo do Título]</div>
+                <div class="bloco-ads" style="margin-top: 30px;">[Bloco AdSense In-Content]</div>
             </div>
-
             <div class="mini-calculadora fade-in">
                 <h3 style="color: var(--cor-acao); text-align: center;">Simulador Rápido (Juros Compostos)</h3>
-                
                 <label for="mc_capital">Capital Inicial (R$):</label>
                 <input type="number" id="mc_capital" value="1000">
-
                 <label for="mc_aporte">Aporte Mensal (R$):</label>
                 <input type="number" id="mc_aporte" value="100">
-
                 <label for="mc_anos">Período (Anos):</label>
                 <input type="number" id="mc_anos" value="10">
-
                 <button class="btn-acao" onclick="calcularMiniCompostos()" style="width: 100%; margin-top: 10px;">
                     Calcular Rápido
                 </button>
-
                 <div class="mini-resultado" id="mc_resultado" style="display: none; text-align: center;">
                     <hr style="margin: 10px 0; border-color: var(--cor-acao);">
                     <p style="font-size: 0.9em; margin: 5px 0; color: var(--cor-texto);">Montante Total:</p>
@@ -172,118 +158,130 @@
                 </div>
             </div>
         </section>
-        
+
+        <section class="preview-section fade-in">
+            <h2>Últimas Notícias do Mercado</h2>
+            <div class="swiper-container" id="noticias-swiper">
+                <div class="swiper-wrapper" id="preview-noticias">
+                    </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="noticias.html" class="btn-acao">Ver Todas as Notícias</a>
+            </div>
+        </section>
+
+        <section class="preview-section fade-in">
+            <h2>Artigos em Destaque do Blog</h2>
+            <div class="swiper-container" id="blog-swiper">
+                 <div class="swiper-wrapper" id="preview-blog">
+                     </div>
+                 <div class="swiper-button-next"></div>
+                 <div class="swiper-button-prev"></div>
+                 <div class="swiper-pagination"></div>
+            </div>
+             <div style="text-align: center; margin-top: 20px;">
+                <a href="blog.html" class="btn-acao">Acessar o Blog Completo</a>
+            </div>
+        </section>
+
         <section class="prova-social fade-in">
             <h2 style="color: var(--cor-contraste); margin-bottom: 20px;">O que Nossos Usuários Dizem</h2>
-            <p class="depoimento">
-                <i class="fas fa-quote-left" style="color: var(--cor-acao);"></i> 
+            <p class="depoimento-texto">
+                <i class="fas fa-quote-left" style="color: var(--cor-acao);"></i>
                 A clareza do InvesJota é a maior vantagem. Foco no conteúdo e design que inspira confiança e disciplina.
                 <i class="fas fa-quote-right" style="color: var(--cor-acao);"></i>
             </p>
-            <p style="font-weight: bold; color: var(--cor-acao);">— Dra. Sofia Costa, Consultora de Investimentos</p>
-        </section>
-
-        <section class="fade-in" style="margin-top: 50px; text-align: center;">
-            <h2 style="color: var(--cor-contraste);">Fique por Dentro do Mercado.</h2>
-            <p style="color: var(--cor-texto);">Leia as últimas notícias sobre investimentos e economia global.</p>
-            <button class="btn-acao" onclick="location.href='noticias.html'">
-                Ver Feed de Notícias
-            </button>
+            <p class="nome-cliente">— Dra. Sofia Costa, Consultora de Investimentos</p>
         </section>
 
     </main>
 
     <div class="bloco-ads">[Bloco AdSense Rodapé - Bloco Responsivo]</div>
-    
+
     <footer>
-        <div class="footer-col">
-            <h4 style="color: var(--cor-acao);">InvesJota</h4>
-            <p style="font-size: 0.9em;">Análise e precisão para o investidor.</p>
-        </div>
-        <div class="footer-col">
-            <h4 style="color: var(--cor-acao);">Recursos</h4>
-            <a href="catalogo_calculadoras.html">Todas as Calculadoras</a>
-            <a href="juros_compostos.html">Juros Compostos</a>
-            <a href="calculadora_renda.html">Viver de Renda</a>
-        </div>
-        <div class="footer-col">
-            <h4 style="color: var(--cor-acao);">Legal</h4>
-            <a href="#">Termos de Uso</a>
-            <a href="#">Política de Privacidade</a>
-        </div>
-        <div class="footer-col">
-            <h4 style="color: var(--cor-acao);">Regra de Ouro</h4>
-            <p style="font-weight: bold; font-size: 1.1em; color: var(--cor-suave);">"O tempo é o melhor amigo do dinheiro."</p>
-        </div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">InvesJota</h4><p style="font-size: 0.9em;">Análise e precisão para o investidor.</p></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Recursos</h4><a href="catalogo_calculadoras.html">Todas as Calculadoras</a><a href="juros_compostos.html">Juros Compostos</a><a href="calculadora_renda.html">Viver de Renda</a></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Legal</h4><a href="#">Termos de Uso</a><a href="#">Política de Privacidade</a></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Regra de Ouro</h4><p style="font-weight: bold; font-size: 1.1em; color: var(--cor-suave);">"O tempo é o melhor amigo do dinheiro."</p></div>
     </footer>
 
-
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
-        // LÓGICA DO TOGGLE DE TEMA
-        function toggleTheme() {
-            const body = document.body;
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
-            body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            
-            // Trocar ícone do botão
-            const icon = document.getElementById('theme-toggle').querySelector('i');
-            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        // === SIMULAÇÃO DOS DADOS DE NOTÍCIAS E BLOG ===
+        const noticiasSimuladas = [
+            { id: 1, titulo: "Taxa Selic: Impacto na Renda Fixa", resumo: "Análise do ciclo de quedas e estratégias para proteger seu capital da perda de rentabilidade nominal...", link: "#" },
+            { id: 2, titulo: "FIIs de Logística em Alta", resumo: "O e-commerce impulsiona o setor. Veja os fundos com maior Dividend Yield e contratos longos...", link: "#" },
+            { id: 3, titulo: "Volatilidade do Petróleo", resumo: "Geopolítica e OPEP definem os preços. Como usar a instabilidade a seu favor com commodities...", link: "#" },
+            { id: 4, titulo: "Futuro do Pagamento Digital", resumo: "Fintechs e Big Techs revolucionam o mercado. O impacto da tokenização e CBDCs...", link: "#" },
+        ];
+        const artigos = [
+            { id: 11, titulo: "Alocação de Ativos: A Pirâmide de Risco", resumo: "Diversificação estratégica entre Renda Fixa, Variável, Multimercado e Ativos Internacionais para crescimento sólido...", data: "27 Out, 2025", link: "#" },
+            { id: 12, titulo: "Behavioral Finance: Emoções vs. Razão", resumo: "Medo, ganância, excesso de confiança... Descubra os vieses cognitivos que sabotam seus investimentos e como superá-los...", data: "20 Out, 2025", link: "#" },
+            { id: 14, titulo: "Reserva de Emergência Essencial", resumo: "Quanto guardar? Onde investir? Por que ela é o PRIMEIRO passo antes de qualquer investimento arriscado? Guia completo...", data: "01 Out, 2025", link: "#" },
+             { id: 15, titulo: "Diversificação Internacional: Dólar", resumo: "Redução do 'Risco Brasil', acesso a mercados maiores e proteção cambial. Formas simples de investir no exterior...", data: "25 Set, 2025", link: "#" },
+        ];
+
+        // === FUNÇÃO PARA RENDERIZAR CARROSSÉIS ===
+        function renderizarCarrosseis() {
+            const noticiasContainer = document.getElementById('preview-noticias');
+            const blogContainer = document.getElementById('preview-blog');
+            noticiasContainer.innerHTML = ''; blogContainer.innerHTML = '';
+            const MAX_RESUMO_LENGTH = 120; // Tamanho do preview
+
+            // Notícias
+            noticiasSimuladas.forEach(item => {
+                const slide = document.createElement('div'); slide.className = 'swiper-slide';
+                slide.innerHTML = `<div class="preview-card"><h3>${item.titulo}</h3><p>${item.resumo.substring(0, MAX_RESUMO_LENGTH)}${item.resumo.length > MAX_RESUMO_LENGTH ? '...' : ''}</p><a href="artigo.html?id=${item.id}">Ler Mais <i class="fas fa-arrow-right"></i></a></div>`;
+                noticiasContainer.appendChild(slide);
+            });
+
+            // Blog
+            artigos.forEach(item => {
+                 const slide = document.createElement('div'); slide.className = 'swiper-slide';
+                 slide.innerHTML = `<div class="preview-card"><h3>${item.titulo}</h3><p>${item.resumo.substring(0, MAX_RESUMO_LENGTH)}${item.resumo.length > MAX_RESUMO_LENGTH ? '...' : ''}</p><a href="artigo.html?id=${item.id}">Ler Artigo Completo <i class="fas fa-arrow-right"></i></a></div>`;
+                 blogContainer.appendChild(slide);
+            });
+
+            // === INICIALIZAÇÃO DO SWIPERJS ===
+            const swiperNoticias = new Swiper('#noticias-swiper', {
+                slidesPerView: 1, spaceBetween: 10, loop: true,
+                autoplay: { delay: 5000, disableOnInteraction: false },
+                navigation: { nextEl: '#noticias-swiper .swiper-button-next', prevEl: '#noticias-swiper .swiper-button-prev' },
+                pagination: { el: '#noticias-swiper .swiper-pagination', clickable: true },
+                breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+            });
+
+            const swiperBlog = new Swiper('#blog-swiper', {
+                slidesPerView: 1, spaceBetween: 10, loop: true,
+                autoplay: { delay: 5500, disableOnInteraction: false },
+                navigation: { nextEl: '#blog-swiper .swiper-button-next', prevEl: '#blog-swiper .swiper-button-prev' },
+                pagination: { el: '#blog-swiper .swiper-pagination', clickable: true },
+                 breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+            });
         }
 
-        // Aplicar tema salvo no localStorage ou detectar preferência do sistema
+
+        // === LÓGICAS EXISTENTES (Toggle, Widget, Mini-Calc, Scroll) ===
+        function toggleTheme() { const body = document.body; const currentTheme = body.getAttribute('data-theme'); const newTheme = currentTheme === 'light' ? 'dark' : 'light'; body.setAttribute('data-theme', newTheme); localStorage.setItem('theme', newTheme); const icon = document.getElementById('theme-toggle').querySelector('i'); icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon'; try { carregarCotacoes(); } catch (e) {} }
+        function carregarCotacoes() { const cotacoes = { dolar: { valor: 5.12 + (Math.random()*0.1-0.05), variacao: Math.random()*0.03-0.015 }, ibovespa: { valor: 128500 + (Math.random()*500-250), variacao: Math.random()*0.015-0.0075 }, selic: { valor: 10.50 } }; const fDolar = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }); const fPontos = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 0 }); const fSelic = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); const cA = '#00A86B'; const cB = '#CC0000'; const dV = cotacoes.dolar.valor; const dVa = cotacoes.dolar.variacao * 100; const dC = dVa >= 0 ? cA : cB; const dS = dVa >= 0 ? '▲' : '▼'; document.getElementById('cotacao-dolar').textContent = fDolar.format(dV); document.getElementById('status-dolar').textContent = `${dS} ${dVa.toFixed(2)}%`; document.getElementById('status-dolar').style.color = dC; const iV = cotacoes.ibovespa.valor; const iVa = cotacoes.ibovespa.variacao * 100; const iC = iVa >= 0 ? cA : cB; const iS = iVa >= 0 ? '▲' : '▼'; document.getElementById('cotacao-ibov').textContent = fPontos.format(iV); document.getElementById('status-ibov').textContent = `${iS} ${iVa.toFixed(2)}%`; document.getElementById('status-ibov').style.color = iC; document.getElementById('cotacao-selic').textContent = fSelic.format(cotacoes.selic.valor); }
+        function calcularMiniCompostos() { const C = parseFloat(document.getElementById('mc_capital').value) || 0; const A = parseFloat(document.getElementById('mc_aporte').value) || 0; const Anos = parseInt(document.getElementById('mc_anos').value) || 0; const T_anual = 0.10; const taxa_mensal = T_anual / 12; const meses_totais = Anos * 12; let montante = C; for (let m = 0; m < meses_totais; m++) { montante *= (1 + taxa_mensal); montante += A; } const formatador = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }); document.getElementById('mc_montante').textContent = formatador.format(montante); document.getElementById('mc_resultado').style.display = 'block'; }
+
+        // INICIALIZAÇÃO DA PÁGINA
         document.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                document.body.setAttribute('data-theme', savedTheme);
-                const icon = document.getElementById('theme-toggle').querySelector('i');
-                icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-            } else {
-                // Tema padrão como Light 
-                document.body.setAttribute('data-theme', 'light');
-            }
+            if (savedTheme) { document.body.setAttribute('data-theme', savedTheme); document.getElementById('theme-toggle').querySelector('i').className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon'; }
+            else { document.body.setAttribute('data-theme', 'light'); }
+            
+            carregarCotacoes();
+            renderizarCarrosseis(); // Renderiza os carrosséis
         });
 
-
-        // Script para Scroll Animation
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); 
-                }
-            });
-        }, { threshold: 0.1 }); 
-
-        document.querySelectorAll('.fade-in').forEach(element => {
-            observer.observe(element);
-        });
-
-        // LÓGICA DA MINI CALCULADORA (Juros Compostos Simplificados)
-        function calcularMiniCompostos() {
-            const C = parseFloat(document.getElementById('mc_capital').value) || 0;
-            const A = parseFloat(document.getElementById('mc_aporte').value) || 0;
-            const Anos = parseInt(document.getElementById('mc_anos').value) || 0;
-            
-            // Taxa fixa simulada: 10% a.a. (0.10)
-            const T_anual = 0.10; 
-            const taxa_mensal = T_anual / 12;
-            const meses_totais = Anos * 12;
-
-            let montante = C;
-            
-            for (let m = 0; m < meses_totais; m++) {
-                montante *= (1 + taxa_mensal);
-                montante += A;
-            }
-
-            const formatador = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
-            
-            document.getElementById('mc_montante').textContent = formatador.format(montante);
-            document.getElementById('mc_resultado').style.display = 'block';
-        }
+        // Scroll Animation
+        const observer = new IntersectionObserver((entries, observer) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(element => { observer.observe(element); });
     </script>
 </body>
 </html>

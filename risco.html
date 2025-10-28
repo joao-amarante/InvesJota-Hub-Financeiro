@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Risco | InvesJota</title>
+    <link rel="stylesheet" href="assets/css/invesjota_base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .quiz-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: var(--fundo-principal);
+            border: 1px solid var(--cor-suave);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            color: var(--cor-texto);
+        }
+        .questao {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-bottom: 1px dashed var(--cor-suave);
+        }
+        .questao h3 {
+            font-size: 1.2em;
+            color: var(--cor-contraste);
+            margin-bottom: 10px;
+        }
+        .opcao {
+            margin: 10px 0;
+            display: block;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .opcao:hover {
+            background-color: var(--cor-suave);
+        }
+        .opcao input[type="radio"] {
+            margin-right: 10px;
+            accent-color: var(--cor-acao); /* Cor do tema no radio button */
+        }
+        .resultado-risco {
+            margin-top: 40px;
+            padding: 25px;
+            border: 2px solid var(--cor-acao);
+            background-color: var(--cor-suave);
+            border-radius: 6px;
+            text-align: center;
+        }
+        .perfil {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--cor-acao);
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div class="header-fixo">
+        <span class="logo-invesjota">InvesJota</span>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="noticias.html">Notícias</a>
+            <a href="catalogo_calculadoras.html">Calculadoras</a>
+            <a href="juros_simples.html">Juros Simples</a>
+            <a href="blog.html">Blog</a>
+            
+            <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i> 
+            </button>
+        </nav>
+    </div>
+
+    <div class="bloco-ads" style="margin-top: 65px;">[Bloco AdSense Topo/Banner - 728x90]</div>
+
+    <main class="quiz-container fade-in">
+        <h1>Calculadora de Perfil de Risco</h1>
+        <p style="color: var(--cor-texto);">Responda com honestidade para determinar seu perfil de investidor (suitability) e saber quais ferramentas do InvesJota são ideais para você.</p>
+        
+        <div class="bloco-ads">[Bloco AdSense In-Content]</div>
+
+        <section id="questionario">
+            <div class="questao">
+                <h3>1. Se uma ação que você comprou cai 15% em um mês, o que você faz?</h3>
+                <label class="opcao"><input type="radio" name="q1" value="1"> Vendo tudo para evitar perdas maiores.</label> (1 ponto)
+                <label class="opcao"><input type="radio" name="q1" value="3"> Mantenho a posição, esperando a recuperação.</label> (3 pontos)
+                <label class="opcao"><input type="radio" name="q1" value="5"> Compro mais, vendo uma oportunidade de compra barata.</label> (5 pontos)
+            </div>
+
+            <div class="questao">
+                <h3>2. Qual horizonte de tempo você considera para o seu investimento principal?</h3>
+                <label class="opcao"><input type="radio" name="q2" value="1"> Menos de 1 ano (Curto Prazo).</label> (1 ponto)
+                <label class="opcao"><input type="radio" name="q2" value="3"> 3 a 5 anos (Médio Prazo).</label> (3 pontos)
+                <label class="opcao"><input type="radio" name="q2" value="5"> Mais de 10 anos (Longo Prazo).</label> (5 pontos)
+            </div>
+
+            <div class="questao">
+                <h3>3. Seus objetivos financeiros incluem preservar o capital ou maximizar o crescimento?</h3>
+                <label class="opcao"><input type="radio" name="q3" value="1"> Preservar o Capital (Manter o poder de compra).</label> (1 ponto)
+                <label class="opcao"><input type="radio" name="q3" value="3"> Crescimento Equilibrado, aceitando riscos moderados.</label> (3 pontos)
+                <label class="opcao"><input type="radio" name="q3" value="5"> Maximizar o Crescimento, aceitando alta volatilidade.</label> (5 pontos)
+            </div>
+
+            <div class="questao">
+                <h3>4. Qual percentual do seu patrimônio você investiria em Renda Variável (ações, FIIs, etc.)?</h3>
+                <label class="opcao"><input type="radio" name="q4" value="1"> 0% a 10%.</label> (1 ponto)
+                <label class="opcao"><input type="radio" name="q4" value="3"> 20% a 40%.</label> (3 pontos)
+                <label class="opcao"><input type="radio" name="q4" value="5"> Acima de 50%.</label> (5 pontos)
+            </div>
+        </section>
+
+        <button class="btn-acao" onclick="calcularRisco()">Ver Meu Perfil de Investidor</button>
+
+        <div id="resultado" class="resultado-risco" style="display: none;">
+            <h3>Seu Perfil: <span id="perfil-nome" class="perfil"></span></h3>
+            <p id="perfil-descricao"></p>
+            <p id="ferramentas-recomendadas"></p>
+        </div>
+    </main>
+
+    <div class="bloco-ads">[Bloco AdSense Rodapé - Bloco Responsivo]</div>
+
+    <footer>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">InvesJota</h4><p style="font-size: 0.9em;">Análise e precisão para o investidor.</p></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Recursos</h4><a href="catalogo_calculadoras.html">Todas as Calculadoras</a><a href="juros_compostos.html">Juros Compostos</a><a href="calculadora_renda.html">Viver de Renda</a></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Legal</h4><a href="#">Termos de Uso</a><a href="#">Política de Privacidade</a></div>
+        <div class="footer-col"><h4 style="color: var(--cor-acao);">Regra de Ouro</h4><p style="font-weight: bold; font-size: 1.1em; color: var(--cor-suave);">"O tempo é o melhor amigo do dinheiro."</p></div>
+    </footer>
+
+    <script>
+        // Lógica do Quiz e Cálculo de Pontuação
+        function calcularRisco() {
+            let pontuacao = 0;
+            const numQuestoes = 4;
+            let respondidas = 0;
+
+            for (let i = 1; i <= numQuestoes; i++) {
+                const radios = document.getElementsByName('q' + i);
+                let valor = 0;
+                for (const radio of radios) {
+                    if (radio.checked) {
+                        valor = parseInt(radio.value);
+                        respondidas++;
+                        break;
+                    }
+                }
+                pontuacao += valor;
+            }
+
+            if (respondidas < numQuestoes) {
+                alert("Por favor, responda a todas as perguntas para obter seu perfil.");
+                return;
+            }
+
+            let perfilNome, perfilDescricao, ferramentas;
+
+            // Mapeamento de Pontuação (Mínimo: 4, Máximo: 20)
+            if (pontuacao <= 7) {
+                perfilNome = "Conservador";
+                perfilDescricao = "Seu foco é segurança e preservação de capital. Você prefere baixo risco e liquidez, mesmo que o retorno seja menor.";
+                ferramentas = "Ferramentas Recomendadas: Juros Simples e uso conservador na Calculadora de Renda.";
+            } else if (pontuacao <= 13) {
+                perfilNome = "Moderado";
+                perfilDescricao = "Você busca um equilíbrio entre segurança e rentabilidade. Está disposto a correr riscos calculados para obter um crescimento acima da média.";
+                ferramentas = "Ferramentas Recomendadas: Juros Compostos (para simular o crescimento) e Comparador de Cartões (para otimizar custos).";
+            } else {
+                perfilNome = "Agressivo (Arrojado)";
+                perfilDescricao = "Você prioriza o crescimento acelerado do capital. Aceita grande volatilidade e está disposto a assumir altos riscos em busca de altos retornos.";
+                ferramentas = "Ferramentas Recomendadas: Meta Primeiro Milhão (para projeções ambiciosas) e Comparador de Cartões (focando em benefícios de alto valor).";
+            }
+
+            // Exibição do Resultado
+            document.getElementById('perfil-nome').textContent = perfilNome;
+            document.getElementById('perfil-descricao').textContent = perfilDescricao;
+            document.getElementById('ferramentas-recomendadas').textContent = ferramentas;
+            document.getElementById('resultado').style.display = 'block';
+        }
+
+        // --- LÓGICA DO TEMA (REPETIDA) ---
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            const icon = document.getElementById('theme-toggle').querySelector('i');
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+                const icon = document.getElementById('theme-toggle').querySelector('i');
+                icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+            }
+        });
+    </script>
+</body>
+</html>
